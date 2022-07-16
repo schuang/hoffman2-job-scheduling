@@ -1,0 +1,12 @@
+body {
+    font-family: -apple-system,"helvetica neue",helvetica,roboto,noto,"segoe ui",arial,sans-serif;
+    font-weight: 400;
+}
+
+.sidebar-drawer {
+    background: none;
+}
+
+h2 {
+    border-bottom: 1px solid lightgray;
+}
