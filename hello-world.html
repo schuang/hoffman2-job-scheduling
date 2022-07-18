@@ -2,10 +2,10 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Using secure client (ssh)" href="appendix/ssh.html" /><link rel="prev" title="Hoffman2 Cluster Components" href="hoffman2-components.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Diving deeper into Hello world" href="hello-world-advanced.html" /><link rel="prev" title="Hoffman2 Cluster Components" href="hoffman2-components.html" />
 
     
-        <title>&#34;hello world&#34; job script - Hoffman2 Cluster Job Scheduling</title>
+        <title>“hello world” job script - Tutorial: Hoffman2 Cluster Job Scheduling</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
@@ -125,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">Hoffman2 Cluster Job Scheduling</div></a>
+      <a href="index.html"><div class="brand">Tutorial: Hoffman2 Cluster Job Scheduling</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -148,7 +148,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">Hoffman2 Cluster Job Scheduling</span>
+  <span class="sidebar-brand-text">Tutorial: Hoffman2 Cluster Job Scheduling</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -159,7 +159,8 @@
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hoffman2-components.html">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">"hello world" job script</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">“hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world-advanced.html">Diving deeper into Hello world</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
@@ -191,11 +192,11 @@
         </div>
         <article role="main">
           <section id="hello-world-job-script">
-<h1>"hello world" job script<a class="headerlink" href="#hello-world-job-script" title="Permalink to this headline">¶</a></h1>
-<p>In this tutorial, we will create a simple job script, submit it, wait for it to complete, and examine its output.</p>
+<h1>“hello world” job script<a class="headerlink" href="#hello-world-job-script" title="Permalink to this headline">¶</a></h1>
+<p>In this tutorial, we will create a simple job script, submit it, wait for it to complete, and inspect its output files.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>A <strong>job script</strong> is just a standard shell script with additional lines containing job parameters. Some people might call it  a "command file" or "job file" but really it is just a shell script. All of your shell script programming knowledge applies!</p>
+<p>A <strong>job script</strong> is just a standard shell script with additional lines containing job parameters. Some people might call it  a “command file” or “job file” but really it is just a shell script. All of your shell script programming knowledge applies!</p>
 </div>
 <p><svg aria-hidden="true" class="sd-octicon sd-octicon-play sd-text-danger" height="2.0em" version="1.1" viewbox="0 0 24 24" width="2.0em"><path d="M9.5 15.584V8.416a.5.5 0 01.77-.42l5.576 3.583a.5.5 0 010 .842l-5.576 3.584a.5.5 0 01-.77-.42z"></path><path d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z" fill-rule="evenodd"></path></svg> <a class="reference internal" href="demo/qsub-hello-world.html"><span class="doc">Demo: Submitting the hello-world job</span></a></p>
 <section id="create-the-job-script">
@@ -244,10 +245,10 @@ uname -a
 <td><p>At runtime, the job is limited to 2GB of virtual memory</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-l</span> <span class="pre">h_rt=1:00:00</span></code></p></td>
-<td><p>The job's runtime limit is 1 hour.</p></td>
+<td><p>The job’s runtime limit is 1 hour.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-N</span> <span class="pre">myjob</span></code></p></td>
-<td><p>The job's name (can be any string without spaces)</p></td>
+<td><p>The job’s name (can be any string without spaces)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-cwd</span></code></p></td>
 <td><p>When the job starts, it will start from the current directory</p></td>
@@ -262,7 +263,7 @@ uname -a
 </table></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you know Linux shell scripting, you will notice that the lines starting with <code class="docutils literal notranslate"><span class="pre">#</span></code> (except for <code class="docutils literal notranslate"><span class="pre">#!</span></code>, the hashbang line) are just comments from the standard point of a shell script. Indeed, when a job script is run as a normal shell script, these <code class="docutils literal notranslate"><span class="pre">#</span></code> lines are just comments, as expected. However, when this shell script is <em>submitted to the job scheduler</em>, these lines will be recognized as job parameters by the scheduler, and the specified computing resources will be requested accordingly.</p>
+<p>If you know Linux shell scripting, you will notice that the lines starting with <code class="docutils literal notranslate"><span class="pre">#</span></code> (except for <code class="docutils literal notranslate"><span class="pre">#!</span></code>, the <a class="reference external" href="https://en.wikipedia.org/wiki/Shebang_(Unix)#:~:text=In%20computing%2C%20a%20shebang%20is,bang%2C%20or%20hash%2Dpling.">shebang</a> line) are just comments from the standard point of a shell script. Indeed, when a job script is run as a normal shell script, these <code class="docutils literal notranslate"><span class="pre">#</span></code> lines are just comments, as expected. However, when this shell script is <em>submitted to the job scheduler</em>, these lines will be recognized as job parameters by the scheduler, and the specified computing resources will be requested accordingly.</p>
 </div>
 </section>
 <section id="submit-the-job">
@@ -291,11 +292,11 @@ uname -a
 </div>
 <p>If you have successfully submitted the job, but <code class="docutils literal notranslate"><span class="pre">qstate</span> <span class="pre">-u</span> <span class="pre">$USER</span></code> shows nothing, the job may have completed.</p>
 <p>In the above output, <code class="docutils literal notranslate"><span class="pre">qw</span></code> means the job is still pending in the queue, not started yet.</p>
-<p>At some point, the job state will change from <code class="docutils literal notranslate"><span class="pre">qw</span></code> to <code class="docutils literal notranslate"><span class="pre">r</span></code> (running). After the job has completed, you won't see the job in the <code class="docutils literal notranslate"><span class="pre">qstat</span></code> output.</p>
+<p>At some point, the job state will change from <code class="docutils literal notranslate"><span class="pre">qw</span></code> to <code class="docutils literal notranslate"><span class="pre">r</span></code> (running). After the job has completed, you won’t see the job in the <code class="docutils literal notranslate"><span class="pre">qstat</span></code> output.</p>
 </section>
 <section id="inspect-the-job-output">
 <h2>Inspect the job output<a class="headerlink" href="#inspect-the-job-output" title="Permalink to this headline">¶</a></h2>
-<p>After the job has completed, there will be at least two files in the directory <code class="docutils literal notranslate"><span class="pre">~/tutorial-job-sched</span></code> (recall that we used the job option <code class="docutils literal notranslate"><span class="pre">-cwd</span></code> to run in the "current" directory.):</p>
+<p>After the job has completed, there will be at least two files in the directory <code class="docutils literal notranslate"><span class="pre">~/tutorial-job-sched</span></code> (recall that we used the job option <code class="docutils literal notranslate"><span class="pre">-cwd</span></code> to run in the “current” directory.):</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd ~/tutorial-job-sched
 ls -l
 </pre></div>
@@ -311,7 +312,7 @@ ls -l
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>In this exercise, we have performed the following tasks:</p>
 <ul class="simple">
-<li><p>Create a simple job script, which is a shell script with additional "comment" lines specifying the job parameters</p></li>
+<li><p>Create a simple job script, which is a shell script with additional “comment” lines specifying the job parameters</p></li>
 <li><p>Submit the job</p></li>
 <li><p>Check (or monitor) job status</p></li>
 <li><p>Inspect the job output files</p></li>
@@ -366,12 +367,12 @@ Answer<div class="sd-summary-down docutils">
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="appendix/ssh.html">
+          <a class="next-page" href="hello-world-advanced.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Using secure client (ssh)</div>
+                <div class="title">Diving deeper into Hello world</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -389,7 +390,7 @@ Answer<div class="sd-summary-down docutils">
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-17. |
+            Last updated on 2022-07-18. |
         </div>
         
       </footer>
@@ -406,7 +407,7 @@ Answer<div class="sd-summary-down docutils">
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">&quot;hello world&quot; job script</a><ul>
+<li><a class="reference internal" href="#">“hello world” job script</a><ul>
 <li><a class="reference internal" href="#create-the-job-script">Create the job script</a></li>
 <li><a class="reference internal" href="#what-does-it-mean">What does it mean?</a></li>
 <li><a class="reference internal" href="#submit-the-job">Submit the job</a></li>

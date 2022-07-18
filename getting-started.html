@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Hoffman2 Cluster Components" href="hoffman2-components.html" /><link rel="prev" title="Tutorial: Hoffman2 Cluster Job Scheduling" href="index.html" />
 
     
-        <title>Getting Started - Hoffman2 Cluster Job Scheduling</title>
+        <title>Getting Started - Tutorial: Hoffman2 Cluster Job Scheduling</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
@@ -125,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">Hoffman2 Cluster Job Scheduling</div></a>
+      <a href="index.html"><div class="brand">Tutorial: Hoffman2 Cluster Job Scheduling</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -148,7 +148,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">Hoffman2 Cluster Job Scheduling</span>
+  <span class="sidebar-brand-text">Tutorial: Hoffman2 Cluster Job Scheduling</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -159,7 +159,8 @@
   <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hoffman2-components.html">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world.html">"hello world" job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world.html">“hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world-advanced.html">Diving deeper into Hello world</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
@@ -192,12 +193,12 @@
         <article role="main">
           <section id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>Before we start discussing the details of job scheduling...</p>
+<p>Before we start discussing the details of job scheduling…</p>
 <hr class="docutils"/>
 <section id="get-an-account">
 <h2>Get an account<a class="headerlink" href="#get-an-account" title="Permalink to this headline">¶</a></h2>
 <p>If you do not have a Hoffman2 account,
-use <a class="reference external" href="https://www.hoffman2.idre.ucla.edu/Accounts/Requesting-an-account.html">this page</a> to apply for one. The process involves finding a faculty (typically your advisor or professor), called a "sponsor" in the account application process, who will endorse/approve your account application.</p>
+use <a class="reference external" href="https://www.hoffman2.idre.ucla.edu/Accounts/Requesting-an-account.html">this page</a> to apply for one. The process involves finding a faculty (typically your advisor or professor), called a “sponsor” in the account application process, who will endorse/approve your account application.</p>
 <p>Using Hoffman2 cluster is free, provided that you are affiliated with UCLA.</p>
 <p>Once the application process is completed, you will receive  two pieces of information from this step:</p>
 <ol class="arabic simple">
@@ -212,13 +213,13 @@ use <a class="reference external" href="https://www.hoffman2.idre.ucla.edu/Accou
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ssh XXX@hoffman2.idre.ucla.edu
 </pre></div>
 </div>
-<p>and enter your Hoffman2 Cluster password when prompted. The <code class="docutils literal notranslate"><span class="pre">XXX</span></code> above must be replaced with your actual Hoffman2 Cluster username. <code class="docutils literal notranslate"><span class="pre">hoffman2.idre.ucla.edu</span></code> is the IP address of Hoffman2 cluster's login nodes.</p>
+<p>and enter your Hoffman2 Cluster password when prompted. The <code class="docutils literal notranslate"><span class="pre">XXX</span></code> above must be replaced with your actual Hoffman2 Cluster username. <code class="docutils literal notranslate"><span class="pre">hoffman2.idre.ucla.edu</span></code> is the IP address of Hoffman2 cluster’s login nodes.</p>
 <p>If all steps above are successful, at this point you should be on one of the login nodes.</p>
 <p><svg aria-hidden="true" class="sd-octicon sd-octicon-play sd-text-danger" height="2.0em" version="1.1" viewbox="0 0 24 24" width="2.0em"><path d="M9.5 15.584V8.416a.5.5 0 01.77-.42l5.576 3.583a.5.5 0 010 .842l-5.576 3.584a.5.5 0 01-.77-.42z"></path><path d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z" fill-rule="evenodd"></path></svg> <a class="reference internal" href="demo/ssh-connect.html"><span class="doc">Demo: SSH connection</span></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>Hoffman2 Cluster's username and password are <strong>NOT</strong> the same as the UCLA Grid username/password or your local computer's username/password or UCLA logon.</p></li>
+<li><p>Hoffman2 Cluster’s username and password are <strong>NOT</strong> the same as the UCLA Grid username/password or your local computer’s username/password or UCLA logon.</p></li>
 <li><p>Windows users: See the <a class="reference external" href="https://docs.microsoft.com/en-us/windows/terminal/tutorials/ssh">Microsoft tutorial about SSH</a></p></li>
 </ul>
 </div>
@@ -255,13 +256,13 @@ use <a class="reference external" href="https://www.hoffman2.idre.ucla.edu/Accou
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>getent passwd $USER
 </pre></div>
 </div>
-<p>For submitting job scripts (later in this tutorial) written in <code class="docutils literal notranslate"><span class="pre">bash</span></code>, it is ok that your login shell is of a different kind
-- For example, your login shell may have <code class="docutils literal notranslate"><span class="pre">csh</span></code> and you can still submit <code class="docutils literal notranslate"><span class="pre">bash</span></code>-based job scripts. )</p>
+<p>For submitting job scripts (later in this tutorial) written in <code class="docutils literal notranslate"><span class="pre">bash</span></code>, it is fine that your login shell is of a different kind.
+For example, your login shell may have <code class="docutils literal notranslate"><span class="pre">csh</span></code> and you can still submit <code class="docutils literal notranslate"><span class="pre">bash</span></code>-based job scripts.</p>
 </section>
 <section id="job-scheduler">
 <h2>Job scheduler<a class="headerlink" href="#job-scheduler" title="Permalink to this headline">¶</a></h2>
 <p>The job scheduler (software) manages when and how user jobs are dispatched to compute nodes to run. The job parameters are provided for users to specify the required computational resources for a job.</p>
-<p>Hoffman2 cluster's job scheduler is <a class="reference external" href="https://www.altair.com/grid-engine">Altair Grid Engine</a>.</p>
+<p>Hoffman2 cluster’s job scheduler is <a class="reference external" href="https://www.altair.com/grid-engine">Altair Grid Engine</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Working definitions:</p>
@@ -272,7 +273,7 @@ use <a class="reference external" href="https://www.hoffman2.idre.ucla.edu/Accou
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Understanding Hoffman2 cluster's components, the scheduler's parameters and how to set up the runtime environment are essential to successfully submit and run the user's jobs.</p>
+<p>Understanding Hoffman2 cluster’s components, the scheduler’s parameters and how to set up the runtime environment are essential to successfully submit and run the user’s jobs.</p>
 <p>In practice, such understanding may help reducing unnecessary wait time, avoid common mistakes, or know where to look when things do not work.</p>
 </div>
 </section>
@@ -287,7 +288,7 @@ use <a class="reference external" href="https://www.hoffman2.idre.ucla.edu/Accou
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/u/systems/UGE8.6.4/bin/lx-amd64/qhost
 </pre></div>
 </div>
-<p>If not, your account's <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> is not set up correctly. In that case, do one of the followings:</p>
+<p>If not, your account’s <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> is not set up correctly. In that case, do one of the followings:</p>
 <ul>
 <li><p>If you are using <code class="docutils literal notranslate"><span class="pre">bash</span></code> or <code class="docutils literal notranslate"><span class="pre">zsh</span></code>, run the command:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>source /u/local/bin/use-sge.sh
@@ -295,7 +296,7 @@ use <a class="reference external" href="https://www.hoffman2.idre.ucla.edu/Accou
 </div>
 </li>
 <li><p>If you are using <code class="docutils literal notranslate"><span class="pre">csh</span></code> or <code class="docutils literal notranslate"><span class="pre">tcsh</span></code>, run the command:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>source /u/local/bin/usge-sge.csh
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>source /u/local/bin/use-sge.csh
 </pre></div>
 </div>
 </li>
@@ -342,7 +343,7 @@ use <a class="reference external" href="https://www.hoffman2.idre.ucla.edu/Accou
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-17. |
+            Last updated on 2022-07-18. |
         </div>
         
       </footer>

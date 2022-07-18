@@ -2,10 +2,10 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Using secure client (ssh)" href="appendix/ssh.html" /><link rel="prev" title="“hello world” job script" href="hello-world.html" />
 
     
-        <title>Diving deeper into Hello world - Hoffman2 Cluster Job Scheduling</title>
+        <title>Diving deeper into Hello world - Tutorial: Hoffman2 Cluster Job Scheduling</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
@@ -125,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">Hoffman2 Cluster Job Scheduling</div></a>
+      <a href="index.html"><div class="brand">Tutorial: Hoffman2 Cluster Job Scheduling</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -148,7 +148,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">Hoffman2 Cluster Job Scheduling</span>
+  <span class="sidebar-brand-text">Tutorial: Hoffman2 Cluster Job Scheduling</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -156,10 +156,11 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hoffman2-components.html">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world.html">"hello world" job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world.html">“hello world” job script</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Diving deeper into Hello world</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
@@ -212,20 +213,20 @@ sch   17:02   0:00          \_ ...
 module list
 </pre></div>
 </div>
-<p>will result in an error message in the "stderr" file about "module command not found" (because module is only automatically activated in a login shell).</p>
+<p>will result in an error message in the “stderr” file about “module command not found” (because module is only automatically activated in a login shell).</p>
 <p>Of course, this can be rectified by executing the shell initialization within the job script, but it is beside the point here.</p>
 <p>According to the bash manual, one can force the login shell behavior by adding the <code class="docutils literal notranslate"><span class="pre">-l</span></code> option of <code class="docutils literal notranslate"><span class="pre">bash</span></code>. We could modify the first line of the job script above to:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/bash -l
 </pre></div>
 </div>
-<p>and submit it as usual. At run time, we see now bash is runing in the login shell mode with the <code class="docutils literal notranslate"><span class="pre">-l</span></code> option:</p>
+<p>and submit it as usual. At run time, we see now bash is running in the login shell mode with the <code class="docutils literal notranslate"><span class="pre">-l</span></code> option:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sge  Apr24 707:57 /u/systems/UGE8.6.4/bin/lx-amd64/sge_execd
 sge  17:20   0:00  \_ sge_shepherd-3455543 -bg
 sch  17:20   0:00      \_ /bin/bash -l /work/UGE/8.6.4/n6376/job_scripts/3455543
 sch  17:20   0:00          \_ ...
 </pre></div>
 </div>
-<p>and the module command can work automatically as expected without extra "manual" activation in the job script.</p>
+<p>and the module command can work automatically as expected without extra “manual” activation in the job script.</p>
 </section>
 
         </article>
@@ -233,12 +234,30 @@ sch  17:20   0:00          \_ ...
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="appendix/ssh.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Using secure client (ssh)</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="hello-world.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">“hello world” job script</div>
+                
+              </div>
+            </a>
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-17. |
+            Last updated on 2022-07-18. |
         </div>
         
       </footer>

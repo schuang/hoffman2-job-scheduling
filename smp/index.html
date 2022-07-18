@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     
-        <title>SMP (symmetric multi-threaded) jobs - Hoffman2 Cluster Job Scheduling</title>
+        <title>SMP (symmetric multi-threaded) jobs - Tutorial: Hoffman2 Cluster Job Scheduling</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
@@ -125,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Hoffman2 Cluster Job Scheduling</div></a>
+      <a href="../index.html"><div class="brand">Tutorial: Hoffman2 Cluster Job Scheduling</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -148,7 +148,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Hoffman2 Cluster Job Scheduling</span>
+  <span class="sidebar-brand-text">Tutorial: Hoffman2 Cluster Job Scheduling</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -159,7 +159,8 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">“hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world-advanced.html">Diving deeper into Hello world</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
@@ -204,7 +205,7 @@
 <li><p>A sequential program does not automatically become multi-threaded just because it is submitted as a shared-memory job</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">-pe</span> <span class="pre">shared</span> <span class="pre">N</span></code></p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">h_data</span></code> value is per-core.</p></li>
-<li><p>Total memory is <code class="docutils literal notranslate"><span class="pre">(h_data)</span> <span class="pre">*</span> <span class="pre">(-pe</span> <span class="pre">shared</span> <span class="pre">N)</span></code>. The job will not start if this product is "too big".</p></li>
+<li><p>Total memory is <code class="docutils literal notranslate"><span class="pre">(h_data)</span> <span class="pre">*</span> <span class="pre">(-pe</span> <span class="pre">shared</span> <span class="pre">N)</span></code>. The job will not start if this product is “too big”.</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">N</span></code> is too large and the scheduler cannot find an available compute node, the job will not start.</p></li>
 </ul>
 <p>Consider this example:</p>
@@ -219,7 +220,7 @@
 <p>This job requires <code class="docutils literal notranslate"><span class="pre">4g*16</span> <span class="pre">=</span> <span class="pre">64g</span></code> of memory on a compute node to start.</p>
 <ul class="simple">
 <li><p>It will not start on compute nodes having only 32G of memory.</p></li>
-<li><p>Even if it could start on a 64GB (or greater) compute node, there will be some wait time because the scheduler needs to "drain" a whole 64GB spot to run this job.</p></li>
+<li><p>Even if it could start on a 64GB (or greater) compute node, there will be some wait time because the scheduler needs to “drain” a whole 64GB spot to run this job.</p></li>
 <li><p>If the program is sequential (not multi-threaded), 15 CPU cores will be idle (wasted!)</p></li>
 <li><p>With <cite>-pe shared</cite>, all requested cores will be on one compute node. Nothing will run across compute nodes.</p></li>
 <li><p>If your program is sequential but needs a big amount of memory, do not use <code class="docutils literal notranslate"><span class="pre">-pe</span> <span class="pre">shared</span></code>! Just use, e.g. <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">h_data=64G</span></code> (without <code class="docutils literal notranslate"><span class="pre">-pe</span> <span class="pre">shared</span> <span class="pre">N</span></code>) to run large-memory, sequential programs.</p></li>
@@ -241,7 +242,7 @@
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-17. |
+            Last updated on 2022-07-18. |
         </div>
         
       </footer>

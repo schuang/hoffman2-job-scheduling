@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     
-        <title>Submitting batch jobs - Hoffman2 Cluster Job Scheduling</title>
+        <title>Submitting batch jobs - Tutorial: Hoffman2 Cluster Job Scheduling</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
@@ -125,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Hoffman2 Cluster Job Scheduling</div></a>
+      <a href="../index.html"><div class="brand">Tutorial: Hoffman2 Cluster Job Scheduling</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -148,7 +148,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">Hoffman2 Cluster Job Scheduling</span>
+  <span class="sidebar-brand-text">Tutorial: Hoffman2 Cluster Job Scheduling</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
@@ -159,7 +159,8 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">“hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world-advanced.html">Diving deeper into Hello world</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
@@ -245,8 +246,8 @@
 <p><strong>Additional comments:</strong></p>
 <ul>
 <li><p>This job script is bash (shell) script (indicated by the line, <code class="docutils literal notranslate"><span class="pre">#!/bin/bash</span></code>), so the body of the script has to written in bash syntax.</p></li>
-<li><p>Without <code class="docutils literal notranslate"><span class="pre">-cwd</span></code>, the output will be written to the user's top level <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory. Use <code class="docutils literal notranslate"><span class="pre">-cwd</span></code> to run in the current directory, and to keep your top-level <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> clean.</p></li>
-<li><p>A batch job does not have a "screen" attached to it; all "screen output" of the program will go here. Similarly for the <code class="docutils literal notranslate"><span class="pre">-e</span></code> option.</p></li>
+<li><p>Without <code class="docutils literal notranslate"><span class="pre">-cwd</span></code>, the output will be written to the user’s top level <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory. Use <code class="docutils literal notranslate"><span class="pre">-cwd</span></code> to run in the current directory, and to keep your top-level <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> clean.</p></li>
+<li><p>A batch job does not have a “screen” attached to it; all “screen output” of the program will go here. Similarly for the <code class="docutils literal notranslate"><span class="pre">-e</span></code> option.</p></li>
 <li><p>The order of these job parameters does not matter.</p></li>
 <li><p>The standard input and output files may be combined by (<code class="docutils literal notranslate"><span class="pre">-e</span></code> is omitted):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#$ -j y</span>
@@ -256,9 +257,9 @@
 </li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">$JOB_ID</span></code> variable makes the stdout/stderr file names unique for different jobs.</p></li>
 <li><p>In the job parameter block (prefixed by <code class="docutils literal notranslate"><span class="pre">#$</span></code>), these environment variables are supported:
-<code class="docutils literal notranslate"><span class="pre">$JOB_ID</span></code>, <code class="docutils literal notranslate"><span class="pre">$TASK_ID</span></code> (see "job array"), <code class="docutils literal notranslate"><span class="pre">$JOB_NAME</span></code>, <code class="docutils literal notranslate"><span class="pre">$HOSTNAME</span></code>, <code class="docutils literal notranslate"><span class="pre">$USER</span></code> and <code class="docutils literal notranslate"><span class="pre">$HOME</span></code></p></li>
-<li><p>By default, the job will allocate one CPU core to run the computation. That's why we also force Matlab to run in the single-thread mode using the option <cite>-singleCompThread</cite>. Running computations exceeding the requested computing resources might cause the job to be terminated without notification.</p></li>
-<li><p>A batch job does not have a "screen" attached to it. That's why we turn off Matlab's GUI (by <code class="docutils literal notranslate"><span class="pre">-nodisplay</span> <span class="pre">-nojvm</span>  <span class="pre">-nosplash</span></code>) to conserve memory consumption. Otherwise the memory size quest (<code class="docutils literal notranslate"><span class="pre">h_data</span></code>) will be unnecessarily much larger.</p></li>
+<code class="docutils literal notranslate"><span class="pre">$JOB_ID</span></code>, <code class="docutils literal notranslate"><span class="pre">$TASK_ID</span></code> (see “job array”), <code class="docutils literal notranslate"><span class="pre">$JOB_NAME</span></code>, <code class="docutils literal notranslate"><span class="pre">$HOSTNAME</span></code>, <code class="docutils literal notranslate"><span class="pre">$USER</span></code> and <code class="docutils literal notranslate"><span class="pre">$HOME</span></code></p></li>
+<li><p>By default, the job will allocate one CPU core to run the computation. That’s why we also force Matlab to run in the single-thread mode using the option <cite>-singleCompThread</cite>. Running computations exceeding the requested computing resources might cause the job to be terminated without notification.</p></li>
+<li><p>A batch job does not have a “screen” attached to it. That’s why we turn off Matlab’s GUI (by <code class="docutils literal notranslate"><span class="pre">-nodisplay</span> <span class="pre">-nojvm</span>  <span class="pre">-nosplash</span></code>) to conserve memory consumption. Otherwise the memory size quest (<code class="docutils literal notranslate"><span class="pre">h_data</span></code>) will be unnecessarily much larger.</p></li>
 </ul>
 </section>
 <section id="common-mistakes">
@@ -280,7 +281,7 @@
 </div>
 <p>In this case, the job will allocate just 4 bytes of memory to run. Most likely it will fail.</p>
 </li>
-<li><p>Fail to initialize Modules, or fail to <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span></code>, resulting in "<code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code>" error messages.</p>
+<li><p>Fail to initialize Modules, or fail to <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span></code>, resulting in “<code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code>” error messages.</p>
 <blockquote>
 <div><p>When a job starts, it is run in a non-login shell in which Modules is not initialized. Consequently, it is necessary to initialize Modules in a job script (line 9 in the example above).</p>
 </div></blockquote>
@@ -330,7 +331,7 @@ matlab -nodisplay -nojvm  -nosplash -singleCompThread  &lt; svd.m
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-17. |
+            Last updated on 2022-07-18. |
         </div>
         
       </footer>
