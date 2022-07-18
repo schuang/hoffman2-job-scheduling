@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     <link rel="stylesheet" type="text/css" href="../_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/site.css" />
     
     
 
@@ -157,8 +158,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -189,9 +192,9 @@
         <article role="main">
           <section id="using-l-arch">
 <h1>Using <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">arch</span></code><a class="headerlink" href="#using-l-arch" title="Permalink to this headline">¶</a></h1>
-<p>As shown by <a class="reference external" href="http://hpc.ucla.edu/hoffman2/status/cpu_model.html">this graph</a>, Hoffman2 Cluster’s compute nodes have various CPU models. Without specifying CPU models, the job scheduler would allocate compute nodes that satisfy the requirements job parameters.</p>
+<p>As shown by <a class="reference external" href="http://hpc.ucla.edu/hoffman2/status/cpu_model.html">this graph</a>, Hoffman2 Cluster's compute nodes have various CPU models. Without specifying CPU models, the job scheduler would allocate compute nodes that satisfy the requirements job parameters.</p>
 <p>The user can use the option <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">arch=...</span></code> option to specify the CPU model if preferred. For example,</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">l</span> <span class="n">arch</span><span class="o">=</span><span class="n">intel</span><span class="o">-</span><span class="n">gold</span><span class="o">-*</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>-l arch=intel-gold-*
 </pre></div>
 </div>
 <p>will force the job to run only on the <code class="docutils literal notranslate"><span class="pre">intel-gold</span></code> class compute nodes.</p>
@@ -227,7 +230,7 @@ complex_values        arch=intel-gold-6140,exclusive=true,h_data=192G, \
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-16. |
+            Last updated on 2022-07-17. |
         </div>
         
       </footer>

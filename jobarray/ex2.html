@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     <link rel="stylesheet" type="text/css" href="../_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/site.css" />
     
     
 
@@ -157,8 +158,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -189,7 +192,7 @@
         <article role="main">
           <section id="example-2">
 <h1>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
 #$ -cwd
 #$ -l h_data=2g,h_rt=00:10:00
 #$ -j y
@@ -209,7 +212,7 @@ stdout.474858.1   stdout.474858.21  stdout.474858.41  stdout.474858.61  stdout.4
 stdout.474858.11  stdout.474858.31  stdout.474858.51  stdout.474858.71  stdout.474858.91
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat stdout.474858.1
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cat stdout.474858.1
 SGE_TASK_ID = 1  tid=1
 SGE_TASK_ID = 1  tid=2
 SGE_TASK_ID = 1  tid=3
@@ -222,7 +225,7 @@ SGE_TASK_ID = 1  tid=9
 SGE_TASK_ID = 1  tid=10
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat stdout.474858.11
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cat stdout.474858.11
 SGE_TASK_ID = 11  tid=11
 SGE_TASK_ID = 11  tid=12
 SGE_TASK_ID = 11  tid=13
@@ -235,8 +238,8 @@ SGE_TASK_ID = 11  tid=19
 SGE_TASK_ID = 11  tid=20
 </pre></div>
 </div>
-<p>…</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat stdout.474858.91
+<p>...</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cat stdout.474858.91
 SGE_TASK_ID = 91  tid=91
 SGE_TASK_ID = 91  tid=92
 SGE_TASK_ID = 91  tid=93
@@ -261,7 +264,7 @@ SGE_TASK_ID = 91  tid=100
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-16. |
+            Last updated on 2022-07-17. |
         </div>
         
       </footer>

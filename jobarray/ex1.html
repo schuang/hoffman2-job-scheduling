@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     <link rel="stylesheet" type="text/css" href="../_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/site.css" />
     
     
 
@@ -157,8 +158,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -189,7 +192,7 @@
         <article role="main">
           <section id="example-1">
 <h1>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
 #$ -cwd
 #$ -t 1-10
 #$ -N test
@@ -201,13 +204,13 @@ echo 'hello' $SGE_TASK_ID
 </pre></div>
 </div>
 <p>After the run, there will be 10 output files:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls stdout*
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ls stdout*
 stdout.475262.1   stdout.475262.2  stdout.475262.4  stdout.475262.6  stdout.475262.8
 stdout.475262.10  stdout.475262.3  stdout.475262.5  stdout.475262.7  stdout.475262.9
 </pre></div>
 </div>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat stdout.475262.1
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cat stdout.475262.1
 hello 1
 </pre></div>
 </div>
@@ -223,7 +226,7 @@ hello 1
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-16. |
+            Last updated on 2022-07-17. |
         </div>
         
       </footer>

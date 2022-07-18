@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     <link rel="stylesheet" type="text/css" href="../_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/site.css" />
     
     
 
@@ -157,8 +158,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -189,8 +192,8 @@
         <article role="main">
           <section id="windows-file">
 <h1>Windows file<a class="headerlink" href="#windows-file" title="Permalink to this headline">¶</a></h1>
-<p>Text files on Microsoft Windows and Linux (Hoffman2 cluster) use different end of line characters. While Linux uses <code class="docutils literal notranslate"><span class="pre">\n</span></code>, Windows uses <code class="docutils literal notranslate"><span class="pre">\n\r</span></code>. This may cause issues if the job script file is edited on a “naive” editor (such as “notepad”) on Windows and then transferred directly to Hoffman2 Cluster. A carefully configured text editor (such as VS Code) on Windows can avoid such situation.</p>
-<p>Symptoms: a strange “bad interpreter” error message when the file appears to look fine .</p>
+<p>Text files on Microsoft Windows and Linux (Hoffman2 cluster) use different end of line characters. While Linux uses <code class="docutils literal notranslate"><span class="pre">\n</span></code>, Windows uses <code class="docutils literal notranslate"><span class="pre">\n\r</span></code>. This may cause issues if the job script file is edited on a "naive" editor (such as "notepad") on Windows and then transferred directly to Hoffman2 Cluster. A carefully configured text editor (such as VS Code) on Windows can avoid such situation.</p>
+<p>Symptoms: a strange "bad interpreter" error message when the file appears to look fine .</p>
 <p>Consider the file <a class="reference download internal" download="" href="../_downloads/ccb46c05ac3aedb0adf50e46dcb178f5/windows.sh"><code class="xref download docutils literal notranslate"><span class="pre">windows.sh</span></code></a>. The file looks normal using the <code class="docutils literal notranslate"><span class="pre">cat</span></code> command:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cat windows.sh
 
@@ -201,7 +204,7 @@
 #$ -l h_rt=1:00:00,h_data=2G
 </pre></div>
 </div>
-<p>But the “Windows” characters (<code class="docutils literal notranslate"><span class="pre">^M</span></code>) are visible if the <code class="docutils literal notranslate"><span class="pre">-v</span></code> option is added to the <code class="docutils literal notranslate"><span class="pre">cat</span></code> command:</p>
+<p>But the "Windows" characters (<code class="docutils literal notranslate"><span class="pre">^M</span></code>) are visible if the <code class="docutils literal notranslate"><span class="pre">-v</span></code> option is added to the <code class="docutils literal notranslate"><span class="pre">cat</span></code> command:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ cat -v windows.sh
 
 #!/bin/bash^M
@@ -213,7 +216,7 @@
 </pre></div>
 </div>
 <p>The problem is easily fixed by running the utility program <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code> on the file <code class="docutils literal notranslate"><span class="pre">windows.sh</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dos2unix</span> <span class="n">windows</span><span class="o">.</span><span class="n">sh</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>dos2unix windows.sh
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">^M</span></code> characters are now gone:</p>
@@ -238,7 +241,7 @@
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-16. |
+            Last updated on 2022-07-17. |
         </div>
         
       </footer>

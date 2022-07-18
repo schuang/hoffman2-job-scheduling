@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     <link rel="stylesheet" type="text/css" href="../_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/site.css" />
     
     
 
@@ -157,8 +158,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -192,18 +195,18 @@
 <p><strong>Key point:</strong> If you use a persistent session (e.g. tmux or screen), you must log in to a specific login node to reattach to an old session.</p>
 <p>If you use Hoffman2 cluster regularly, you may consider creating a persistent session on one of the login nodes using screen or tmux.</p>
 <p>Your local computer (laptop or desktop) may be rebooted from now and then, but the login nodes are rarely rebooted</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ssh login2 uptime
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ssh login2 uptime
 21:59:56 up 42 days,  2:43, 62 users,  load average: 1.68, 0.92, 0.65
 </pre></div>
 </div>
-<p>One can create persistent session using <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Screen">screen</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Tmux">tmux</a> on the login nodes, and reconnect to it in the next login so that you don’t have to repeatedly set up your environment.</p>
+<p>One can create persistent session using <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Screen">screen</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Tmux">tmux</a> on the login nodes, and reconnect to it in the next login so that you don't have to repeatedly set up your environment.</p>
 <p>But there are multiple login nodes.  When you <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">me@hoffman2.idre.ucla.edu</span></code>, you are assigned an arbitrary login node, which may not be the one that your screen/tmux session was on.</p>
 <p>If your persistent session is on one of the login nodes, you must always ssh specifically to that login node in order to re-attach to your tmux/screen session, e.g.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">me</span><span class="nd">@login2</span><span class="o">.</span><span class="n">hoffman2</span><span class="o">.</span><span class="n">idre</span><span class="o">.</span><span class="n">ucla</span><span class="o">.</span><span class="n">edu</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ssh me@login2.hoffman2.idre.ucla.edu
 </pre></div>
 </div>
 <p>Typically you would submit jobs or launch interactive jobs from the persistent screen/tmux session, instead of running compute-intensive tasks directly on the login nodes.</p>
-<p>If you are not using screen or tmux, don’t worry. Just submit jobs, batch or interactive, from the terminal of your login session.</p>
+<p>If you are not using screen or tmux, don't worry. Just submit jobs, batch or interactive, from the terminal of your login session.</p>
 </section>
 
         </article>
@@ -216,7 +219,7 @@
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-16. |
+            Last updated on 2022-07-17. |
         </div>
         
       </footer>

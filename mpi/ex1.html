@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     <link rel="stylesheet" type="text/css" href="../_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/site.css" />
     
     
 
@@ -157,8 +158,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -189,7 +192,7 @@
         <article role="main">
           <section id="example">
 <h1>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
 #$ -cwd
 #$ -l h_rt=1:00:00,h_data=2g
 #$ -pe dc* 36
@@ -210,7 +213,7 @@ mpirun -n 36 hostname
 </pre></div>
 </div>
 <p>In one run, it ran on one 36-core compute node:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat  stdout.475739
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cat  stdout.475739
 n7645 36 pod_ib100.q@n7645 &lt;NULL&gt;
 /u/local/compilers/intel/18.0.4/compilers_and_libraries_2018.5.274/linux/mpi/intel64/bin/mpirun
 n7645
@@ -251,8 +254,8 @@ n7645
 n7645
 </pre></div>
 </div>
-<p>In another run, it ran across two compute nodes – 24 cores on one compute node and 12 cores on another:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat  stdout.475872
+<p>In another run, it ran across two compute nodes -- 24 cores on one compute node and 12 cores on another:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cat  stdout.475872
 n6365 24 pod_ib56_xgold.q@n6365 &lt;NULL&gt;
 n7050 12 pod_ib56_xgold.q@n7050 &lt;NULL&gt;
 /u/local/compilers/intel/18.0.4/compilers_and_libraries_2018.5.274/linux/mpi/intel64/bin/mpirun
@@ -306,7 +309,7 @@ n7050
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-16. |
+            Last updated on 2022-07-17. |
         </div>
         
       </footer>

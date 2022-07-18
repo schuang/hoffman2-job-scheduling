@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     <link rel="stylesheet" type="text/css" href="../_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/site.css" />
     
     
 
@@ -157,8 +158,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -223,67 +226,11 @@ the freeway</p></li>
 <section id="free-account-vs-high-priority-access">
 <h2>Free account vs. High priority access<a class="headerlink" href="#free-account-vs-high-priority-access" title="Permalink to this headline">¶</a></h2>
 <p>Everyone affiliated with UCLA can get an account on Hoffman2 Cluster.
-Research groups can purchase compute nodes for high priority access, or additional storage beyond the standard <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory (see: <a class="reference internal" href="#file-system"><span class="std std-ref">File system</span></a>).
+Research groups can purchase compute nodes for high priority access, or additional storage beyond the standard <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory (see: <span class="xref std std-ref">file system</span>).
 For details about purchasing the pricing, please see: <a class="reference external" href="https://idre.ucla.edu/service-pricing-ordering-information">https://idre.ucla.edu/service-pricing-ordering-information</a></p>
 </section>
-<section id="file-system">
-<span id="id1"></span><h2>File system<a class="headerlink" href="#file-system" title="Permalink to this headline">¶</a></h2>
-<p>You have access to several directories for different purposes:</p>
-<div class="table-wrapper"><table class="colwidths-given docutils align-default">
-<colgroup>
-<col style="width: 25%"/>
-<col style="width: 25%"/>
-<col style="width: 25%"/>
-<col style="width: 25%"/>
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Directory</p></th>
-<th class="head"><p>Environment variable</p></th>
-<th class="head"><p>Purposes</p></th>
-<th class="head"><p>Life span</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>home</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">$HOME</span></code></p></td>
-<td><p>40GB, home directory</p></td>
-<td><p>same as your account</p></td>
-</tr>
-<tr class="row-odd"><td><p>scratch</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">$SCRATCH</span></code></p></td>
-<td><p>2TB, temporary I/O</p></td>
-<td><p>at least 2 weeks (sometimes longer but not guaranteed)</p></td>
-</tr>
-<tr class="row-even"><td><p>work</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">$TMPDIR</span></code></p></td>
-<td><p>100+GB, node-local temporary I/O</p></td>
-<td><p>runtime of a job</p></td>
-</tr>
-<tr class="row-odd"><td><p>Purchased storage (optional)</p></td>
-<td><p>See the symbolic link in your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code>, if available</p></td>
-<td><p>project space</p></td>
-<td><p>monthly/annual renewal</p></td>
-</tr>
-</tbody>
-</table></div>
-<p>In general, the <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory is for storing your source code, scripts, documents and maybe some data files (be aware of the 40GB space limitation).
-The <code class="docutils literal notranslate"><span class="pre">$SCRATCH</span></code> directory is good for running jobs, but you need to copy the useful output away before the files are automatically purged.
-The <code class="docutils literal notranslate"><span class="pre">$TMPDIR</span></code>, local to a compute node, may be useful for certain programs that can take advantage of very fast disk I/O.</p>
-<p>Examples of the directory names:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">$HOME</span></code>: <code class="docutils literal notranslate"><span class="pre">/u/home/b/bruin</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">$SCRATCH</span></code>: <code class="docutils literal notranslate"><span class="pre">/u/scratch/b/bruin</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">$TMPDIR</span></code>: <code class="docutils literal notranslate"><span class="pre">/work/1234.1.pod_smp.q</span></code> (different for different jobs, on different compute nodes)</p></li>
-<li><p>Purchased storage: <code class="docutils literal notranslate"><span class="pre">/u/project/PI_name/...</span></code></p></li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It is advisable to use the environment variable names, such as <code class="docutils literal notranslate"><span class="pre">$SCRATCH</span></code>, in your job scripts
-instead of “hard-wiring” the full paths.</p>
-</div>
-</section>
 <section id="the-role-of-the-job-script">
-<span id="id2"></span><h2>The role of the job script<a class="headerlink" href="#the-role-of-the-job-script" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>The role of the job script<a class="headerlink" href="#the-role-of-the-job-script" title="Permalink to this headline">¶</a></h2>
 <p><strong>Key points:</strong></p>
 <ul class="simple">
 <li><p>The job scheduler <strong>does not run your computations automatically.</strong></p></li>
@@ -346,7 +293,7 @@ self-documenting).</p>
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-16. |
+            Last updated on 2022-07-17. |
         </div>
         
       </footer>
@@ -368,7 +315,6 @@ self-documenting).</p>
 <li><a class="reference internal" href="#the-freeway-analogy">The freeway analogy</a></li>
 <li><a class="reference internal" href="#login-nodes-vs-compute-nodes">Login nodes vs. compute nodes</a></li>
 <li><a class="reference internal" href="#free-account-vs-high-priority-access">Free account vs. High priority access</a></li>
-<li><a class="reference internal" href="#file-system">File system</a></li>
 <li><a class="reference internal" href="#the-role-of-the-job-script">The role of the job script</a></li>
 <li><a class="reference internal" href="#elements-of-job-scheduling">Elements of Job Scheduling</a></li>
 <li><a class="reference internal" href="#hoffman2-cluster-status">Hoffman2 Cluster Status</a></li>

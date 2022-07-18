@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     <link rel="stylesheet" type="text/css" href="../_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/site.css" />
     
     
 
@@ -157,8 +158,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -192,27 +195,27 @@
 <section id="quiz-1">
 <h2>Quiz 1<a class="headerlink" href="#quiz-1" title="Permalink to this headline">¶</a></h2>
 <p>What is possibly wrong with this job?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1">#$ -cwd</span>
-<span class="c1">#$ -l h_rt=8:00:00,h_data=16g</span>
-<span class="c1">#$ -pe shared 16</span>
-<span class="c1">#$ -o stdout.$JOB_ID</span>
-<span class="c1">#$ -j y</span>
-<span class="c1">#....</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+#$ -cwd
+#$ -l h_rt=8:00:00,h_data=16g
+#$ -pe shared 16
+#$ -o stdout.$JOB_ID
+#$ -j y
+#....
 </pre></div>
 </div>
 </section>
 <section id="quiz-2">
 <h2>Quiz 2<a class="headerlink" href="#quiz-2" title="Permalink to this headline">¶</a></h2>
 <p>What is possibly wrong with this job?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
 
-<span class="c1">#$ -cwd</span>
-<span class="c1">#$ -l h_rt=8:00:00,h_data=2g</span>
-<span class="c1">#$ -pe shared 64</span>
-<span class="c1">#$ -j y</span>
-<span class="c1">#$ -o stdout.$JOB_ID</span>
-<span class="c1"># ....</span>
+#$ -cwd
+#$ -l h_rt=8:00:00,h_data=2g
+#$ -pe shared 64
+#$ -j y
+#$ -o stdout.$JOB_ID
+# ....
 </pre></div>
 </div>
 </section>
@@ -228,7 +231,7 @@
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-16. |
+            Last updated on 2022-07-17. |
         </div>
         
       </footer>

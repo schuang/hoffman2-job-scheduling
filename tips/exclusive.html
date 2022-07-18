@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     <link rel="stylesheet" type="text/css" href="../_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/site.css" />
     
     
 
@@ -157,8 +158,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -198,12 +201,12 @@
 </li>
 <li><p>Maximum performance</p>
 <blockquote>
-<div><p>If the user knows how to optimally manage the run, <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">exclusive</span></code> can provide a runtime environment free of the influences of other users’ jobs.</p>
+<div><p>If the user knows how to optimally manage the run, <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">exclusive</span></code> can provide a runtime environment free of the influences of other users' jobs.</p>
 </div></blockquote>
 </li>
 <li><p>Overcome virtual memory requirement</p>
 <blockquote>
-<div><p>Some programs require a huge amount of virtual memory but not as much resident memory. Using <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">exclusive</span></code> could bypass the virtual memory limit. However, the user is still responsible for allocating reasonable memory to run the job to avoid the job being terminated by Linux’s OOM (Out Of Memory) killer.</p>
+<div><p>Some programs require a huge amount of virtual memory but not as much resident memory. Using <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">exclusive</span></code> could bypass the virtual memory limit. However, the user is still responsible for allocating reasonable memory to run the job to avoid the job being terminated by Linux's OOM (Out Of Memory) killer.</p>
 </div></blockquote>
 </li>
 </ul>
@@ -211,10 +214,10 @@
 <ul>
 <li><p>Using <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">exclusive</span></code> may increase wait time</p>
 <blockquote>
-<div><p>The job scheduler needs to “drain” the entire node(s) for the exclusive job.</p>
+<div><p>The job scheduler needs to "drain" the entire node(s) for the exclusive job.</p>
 </div></blockquote>
 </li>
-<li><p>All of the Hoffman2 cluster’s nodes have multiple CPU cores. Ideally the exclusive job will take advantage of all of the CPU cores, if applicable.</p></li>
+<li><p>All of the Hoffman2 cluster's nodes have multiple CPU cores. Ideally the exclusive job will take advantage of all of the CPU cores, if applicable.</p></li>
 </ul>
 </section>
 
@@ -228,7 +231,7 @@
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-16. |
+            Last updated on 2022-07-17. |
         </div>
         
       </footer>

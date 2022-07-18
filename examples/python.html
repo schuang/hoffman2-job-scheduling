@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     <link rel="stylesheet" type="text/css" href="../_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/site.css" />
     
     
 
@@ -157,8 +158,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -189,21 +192,21 @@
         <article role="main">
           <section id="python">
 <h1>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
 
-<span class="c1">#$ -cwd</span>
-<span class="c1">#$ -l h_rt=8:00:00,h_data=2g</span>
-<span class="c1">#$ -o Stdout.$JOB_ID</span>
-<span class="c1">#$ -e Stderr.$JOB_ID</span>
-<span class="c1">#$ -j n</span>
-<span class="c1">#$ -m bea</span>
+#$ -cwd
+#$ -l h_rt=8:00:00,h_data=2g
+#$ -o Stdout.$JOB_ID
+#$ -e Stderr.$JOB_ID
+#$ -j n
+#$ -m bea
 
-<span class="c1"># Use system-wise modules</span>
-<span class="n">source</span> <span class="o">/</span><span class="n">u</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">Modules</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">init</span><span class="o">/</span><span class="n">modules</span><span class="o">.</span><span class="n">sh</span>
-<span class="n">module</span> <span class="n">load</span> <span class="n">python</span><span class="o">/</span><span class="mf">3.9.6</span>
+# Use system-wise modules
+source /u/local/Modules/default/init/modules.sh
+module load python/3.9.6
 
-<span class="c1"># Run program</span>
-<span class="n">python3</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="n">script</span><span class="o">.</span><span class="n">py</span>
+# Run program
+python3 /path/to/your/Python/script.py
 </pre></div>
 </div>
 </section>
@@ -218,7 +221,7 @@
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-16. |
+            Last updated on 2022-07-17. |
         </div>
         
       </footer>

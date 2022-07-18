@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     <link rel="stylesheet" type="text/css" href="_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="_static/site.css" />
     
     
 
@@ -157,8 +158,11 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world.html">"hello world" job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world-advanced.html">Diving deeper into Hello world</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -187,33 +191,45 @@
           </label>
         </div>
         <article role="main">
-          <section id="hoffman2-cluster-job-scheduling-tutorial">
-<h1>Hoffman2 Cluster Job Scheduling Tutorial<a class="headerlink" href="#hoffman2-cluster-job-scheduling-tutorial" title="Permalink to this headline">¶</a></h1>
-<p>In this tutorial, you will learn how Hoffman2 cluster’s job scheduler works, and how to submit different types of jobs on Hoffman2 cluster.  With this understanding, you will be able to use Hoffman2 cluster effectively to your advantage to assist your research.</p>
+          <section id="tutorial-hoffman2-cluster-job-scheduling">
+<h1>Tutorial: Hoffman2 Cluster Job Scheduling<a class="headerlink" href="#tutorial-hoffman2-cluster-job-scheduling" title="Permalink to this headline">¶</a></h1>
+<p>In this tutorial, you will learn how Hoffman2 cluster's job scheduler works, and how to submit different types of jobs on Hoffman2 cluster.  With this understanding, you will be able to use Hoffman2 cluster effectively to your advantage to carry out computations for your research.</p>
 <section id="learning-objectives">
 <h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Understand Hoffman2 cluster’s computing resources (for job submission purposes)</p></li>
+<li><p>Hoffman2 cluster's computing resources</p></li>
 <li><p>Write and submit a job script</p></li>
-<li><p>Understand wait time of priority vs. non-priority jobs</p></li>
-<li><p>How to prepare useful information when getting help</p></li>
+<li><p>Understand wait time: priority vs. non-priority jobs</p></li>
+<li><p>Trouble shooting: prepare useful information when getting help</p></li>
 <li><p>(Optional) Constructing advanced job scripts</p></li>
 </ol>
 </section>
+<hr class="docutils"/>
 <section id="learning-modules">
 <h2>Learning modules<a class="headerlink" href="#learning-modules" title="Permalink to this headline">¶</a></h2>
-<p>We recommend going through the modules in order, but you can also jump directly to a particular module of interest.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<p>We recommend going through the modules in order, but you can also jump directly to a particular module of interest. Later modules may depend on the knowledge from the earlier modules.</p>
+<ul class="simple">
+<li><p>Module 1: <a class="reference internal" href="getting-started.html"><span class="doc">Getting started</span></a></p></li>
+<li><p>Module 2: <a class="reference internal" href="hoffman2-components.html"><span class="doc">Computing resources</span></a></p></li>
+<li><p>Module 3: <a class="reference internal" href="hello-world.html"><span class="doc">Writing a "hello world" job script</span></a></p></li>
+<li><p>Module  : <a class="reference external" href="runtime">Understanding runtime environment</a></p></li>
+<li><p>Module : <a href="#id1"><span class="problematic" id="id2">`interactive jobs &lt;&gt;`_</span></a></p></li>
+<li><p>Module : <a class="reference external" href="jobarray">job array</a></p></li>
+<li><p>Module : <a class="reference external" href="mpi">MPI jobs</a></p></li>
+<li><p>Module : <a class="reference external" href="smp">shared-memory</a></p></li>
+<li><p>Module : <a class="reference external" href="highp">high priority jobs on purchased nodes</a></p></li>
+<li><p>Module : <a class="reference internal" href="gpu.html"><span class="doc">GPU computing</span></a></p></li>
+<li><p>Module : Examples</p></li>
 </ul>
+<div class="toctree-wrapper compound">
 </div>
 </section>
+<hr class="docutils"/>
 <section id="appendix">
 <h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h2>
 <p>This area contains supplementary materials for the main tutorial.</p>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -239,7 +255,7 @@
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-16. |
+            Last updated on 2022-07-17. |
         </div>
         
       </footer>
@@ -256,7 +272,7 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Hoffman2 Cluster Job Scheduling Tutorial</a><ul>
+<li><a class="reference internal" href="#">Tutorial: Hoffman2 Cluster Job Scheduling</a><ul>
 <li><a class="reference internal" href="#learning-objectives">Learning objectives</a></li>
 <li><a class="reference internal" href="#learning-modules">Learning modules</a></li>
 <li><a class="reference internal" href="#appendix">Appendix</a></li>

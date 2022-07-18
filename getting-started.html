@@ -2,7 +2,7 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Writing a “hello world” job script" href="hello-world-job-script.html" /><link rel="prev" title="Hoffman2 Cluster Job Scheduling Tutorial" href="index.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Hoffman2 Cluster Components" href="hoffman2-components.html" /><link rel="prev" title="Tutorial: Hoffman2 Cluster Job Scheduling" href="index.html" />
 
     
         <title>Getting Started - Hoffman2 Cluster Job Scheduling</title>
@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     <link rel="stylesheet" type="text/css" href="_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="_static/site.css" />
     
     
 
@@ -157,8 +158,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world.html">"hello world" job script</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -189,59 +192,76 @@
         <article role="main">
           <section id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>Before we start discussing the details of job scheduling…</p>
+<p>Before we start discussing the details of job scheduling...</p>
+<hr class="docutils"/>
 <section id="get-an-account">
 <h2>Get an account<a class="headerlink" href="#get-an-account" title="Permalink to this headline">¶</a></h2>
-<p>Every user needs an account to log into Hoffman2 cluster.
-If you do not have a Hoffman2 account,
-use <a class="reference external" href="https://www.hoffman2.idre.ucla.edu/Accounts/Requesting-an-account.html">this page</a> to apply for one. The process involves finding a faculty (typically your advisor or professor), called a “sponsor” in the account application process, who will endorse/approve your account application.</p>
-<p>Getting an Hoffman2 account is free of charge.</p>
+<p>If you do not have a Hoffman2 account,
+use <a class="reference external" href="https://www.hoffman2.idre.ucla.edu/Accounts/Requesting-an-account.html">this page</a> to apply for one. The process involves finding a faculty (typically your advisor or professor), called a "sponsor" in the account application process, who will endorse/approve your account application.</p>
+<p>Using Hoffman2 cluster is free, provided that you are affiliated with UCLA.</p>
 <p>Once the application process is completed, you will receive  two pieces of information from this step:</p>
-<ul class="simple">
+<ol class="arabic simple">
 <li><p>Your Hoffman2 Cluster username</p></li>
 <li><p>Your Hoffman2 Cluster password</p></li>
-</ul>
+</ol>
 </section>
+<hr class="docutils"/>
 <section id="ssh-login">
-<h2>ssh login<a class="headerlink" href="#ssh-login" title="Permalink to this headline">¶</a></h2>
-<p>You will use the secure shell (ssh) to connect to Hoffman2 Cluster. In a Linux, Mac or Windows terminal, or something similar, run</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">your_user_name</span><span class="nd">@hoffman2</span><span class="o">.</span><span class="n">idre</span><span class="o">.</span><span class="n">ucla</span><span class="o">.</span><span class="n">edu</span>
+<h2>SSH login<a class="headerlink" href="#ssh-login" title="Permalink to this headline">¶</a></h2>
+<p>Use the secure shell (SSH) to connect to Hoffman2 Cluster. Suppose your Hoffman2 user name is <code class="docutils literal notranslate"><span class="pre">XXX</span></code>. In a Linux, Mac or Windows terminal, run:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ssh XXX@hoffman2.idre.ucla.edu
 </pre></div>
 </div>
-<aside class="sidebar">
-<p><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-info sd-shadow-sm reference external" href="https://youtube.com"><span>ssh demo</span></a></p>
-</aside>
-<p>and enter your Hoffman2 Cluster password when prompted. The <code class="docutils literal notranslate"><span class="pre">your_user_name</span></code> above must be replaced with your Hoffman2 Cluster username.</p>
-<p>If all steps above are successful, you should be on one of the login nodes.</p>
+<p>and enter your Hoffman2 Cluster password when prompted. The <code class="docutils literal notranslate"><span class="pre">XXX</span></code> above must be replaced with your actual Hoffman2 Cluster username. <code class="docutils literal notranslate"><span class="pre">hoffman2.idre.ucla.edu</span></code> is the IP address of Hoffman2 cluster's login nodes.</p>
+<p>If all steps above are successful, at this point you should be on one of the login nodes.</p>
+<p><svg aria-hidden="true" class="sd-octicon sd-octicon-play sd-text-danger" height="2.0em" version="1.1" viewbox="0 0 24 24" width="2.0em"><path d="M9.5 15.584V8.416a.5.5 0 01.77-.42l5.576 3.583a.5.5 0 010 .842l-5.576 3.584a.5.5 0 01-.77-.42z"></path><path d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z" fill-rule="evenodd"></path></svg> <a class="reference internal" href="demo/ssh-connect.html"><span class="doc">Demo: SSH connection</span></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Use <strong>Hoffman2 Cluser</strong> username and password to log in (ssh) Hoffman2 Cluster.</p>
-<p>They are <strong>NOT</strong> the same as the Grid username/password or your local computer’s username/password.</p>
+<ul class="simple">
+<li><p>Hoffman2 Cluster's username and password are <strong>NOT</strong> the same as the UCLA Grid username/password or your local computer's username/password or UCLA logon.</p></li>
+<li><p>Windows users: See the <a class="reference external" href="https://docs.microsoft.com/en-us/windows/terminal/tutorials/ssh">Microsoft tutorial about SSH</a></p></li>
+</ul>
 </div>
 </section>
+<hr class="docutils"/>
 <section id="text-editing">
 <h2>Text editing<a class="headerlink" href="#text-editing" title="Permalink to this headline">¶</a></h2>
 <p>Job submission involves writing job script (a shell script saved as a text file) that specifies the job parameters and the runtime environment. Therefore, it is useful to know how to edit text files on Hoffman2 cluster.</p>
 <p>The recommended way is to edit the text file on Hoffman2 Cluster directly, using a text editors such as <code class="docutils literal notranslate"><span class="pre">nano</span></code>, <code class="docutils literal notranslate"><span class="pre">vim</span></code> or <code class="docutils literal notranslate"><span class="pre">emacs</span></code>:</p>
-<aside class="sidebar">
-<p><a class="sd-sphinx-override sd-btn sd-text-wrap sd-btn-info sd-shadow-sm reference external" href="https://youtube.com"><span>nano demo</span></a></p>
-</aside>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">nano</span></code> is quite easy to use, highly recommended for new users.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">vim</span></code> and <code class="docutils literal notranslate"><span class="pre">emacs</span></code> are very powerful; mastering them helps you become more efficient in handling text files.</p></li>
 </ul>
+<p><svg aria-hidden="true" class="sd-octicon sd-octicon-play sd-text-danger" height="2.0em" version="1.1" viewbox="0 0 24 24" width="2.0em"><path d="M9.5 15.584V8.416a.5.5 0 01.77-.42l5.576 3.583a.5.5 0 010 .842l-5.576 3.584a.5.5 0 01-.77-.42z"></path><path d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z" fill-rule="evenodd"></path></svg> <a class="reference internal" href="demo/nano-editor.html"><span class="doc">Demo: using nano text editor</span></a></p>
 <p>Alternatively, if you must, you could edit the text file on your local computer and upload it via ssh to Hoffman2 Cluster. This approach works, although it may be cumbersome.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When transferring text files to Hoffman2 cluster, be aware of the differences of the end-of-line characters between Windows (<code class="docutils literal notranslate"><span class="pre">\r\n</span></code>) and Linux (<code class="docutils literal notranslate"><span class="pre">\n</span></code>). For example, a shell script file containing <code class="docutils literal notranslate"><span class="pre">\r\n</span></code> will not work on Hoffman2 cluster.</p>
+<ul class="simple">
+<li><p><strong>Attention Windows users:</strong> When transferring text files to Hoffman2 cluster, be aware of the differences of the end-of-line characters between Windows (<code class="docutils literal notranslate"><span class="pre">\r\n</span></code>) and Linux (<code class="docutils literal notranslate"><span class="pre">\n</span></code>). For example, a shell script file containing <code class="docutils literal notranslate"><span class="pre">\r\n</span></code> will not work on Hoffman2 cluster.</p></li>
+<li><p>Depending on your setup, when a file is transferred to Hoffman2 Cluster, the file permission might not be entirely correct and needs a fix (typically by the command <code class="docutils literal notranslate"><span class="pre">chmod</span></code>).</p></li>
+</ul>
 </div>
+</section>
+<hr class="docutils"/>
+<section id="what-shell">
+<h2>What shell?<a class="headerlink" href="#what-shell" title="Permalink to this headline">¶</a></h2>
+<p>There are different login shells available on Hoffman2 cluster. While most users use <code class="docutils literal notranslate"><span class="pre">bash</span></code> shell, others have <code class="docutils literal notranslate"><span class="pre">csh</span></code>, <code class="docutils literal notranslate"><span class="pre">tcsh</span></code> or <code class="docutils literal notranslate"><span class="pre">zsh</span></code> shells.</p>
+<p>Most of the examples in this tutorial use <code class="docutils literal notranslate"><span class="pre">bash</span></code>. If you type bash commends into a non-bash shell, they may not work. However, it is usually not difficult to translate a bash command to a non-bash counterpart.</p>
+<p>To see your current shell type, run this command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo $0
+</pre></div>
+</div>
+<p>To see your login shell type, see the last column (look for something similar to <code class="docutils literal notranslate"><span class="pre">...:/bin/bash</span></code>):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>getent passwd $USER
+</pre></div>
+</div>
+<p>For submitting job scripts (later in this tutorial) written in <code class="docutils literal notranslate"><span class="pre">bash</span></code>, it is ok that your login shell is of a different kind
+- For example, your login shell may have <code class="docutils literal notranslate"><span class="pre">csh</span></code> and you can still submit <code class="docutils literal notranslate"><span class="pre">bash</span></code>-based job scripts. )</p>
 </section>
 <section id="job-scheduler">
 <h2>Job scheduler<a class="headerlink" href="#job-scheduler" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Hoffman2 cluster’s job scheduler is <a class="reference external" href="https://www.altair.com/grid-engine">Altair Grid Engine</a>.</p></li>
-<li><p>The job scheduler’s commands and syntax provide a way for the users to request computing resources.</p></li>
-</ul>
+<p>The job scheduler (software) manages when and how user jobs are dispatched to compute nodes to run. The job parameters are provided for users to specify the required computational resources for a job.</p>
+<p>Hoffman2 cluster's job scheduler is <a class="reference external" href="https://www.altair.com/grid-engine">Altair Grid Engine</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Working definitions:</p>
@@ -249,71 +269,49 @@ use <a class="reference external" href="https://www.hoffman2.idre.ucla.edu/Accou
 <li><p><strong>Job:</strong> A job is the piece of computation that the user wishes to run.</p></li>
 <li><p><strong>Job parameters:</strong> Example parameters include runtime limit and the memory size. There are many others (more on this later).</p></li>
 </ul>
-<p>Reference: <a class="reference external" href="https://2021.help.altair.com/2021.1/AltairGridEngine/8.6.17/UsersGuideGE.pdf">Altair Grid Engine user guide</a></p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Understanding Hoffman2 cluster’s components, the scheduler’s parameters and how to set up the runtime environment are essential to successfully submit and run the user’s jobs.</p>
+<p>Understanding Hoffman2 cluster's components, the scheduler's parameters and how to set up the runtime environment are essential to successfully submit and run the user's jobs.</p>
 <p>In practice, such understanding may help reducing unnecessary wait time, avoid common mistakes, or know where to look when things do not work.</p>
 </div>
 </section>
-<section id="quiz">
-<h2>Quiz<a class="headerlink" href="#quiz" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li><p>Which file system has has the fastest I/O speed?</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">$SCRATCH</span></code> directory,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">$TMP</span></code> directory.</p></li>
-</ul>
-</li>
-</ol>
-<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
-<summary class="sd-summary-title sd-card-header">
-Answer<div class="sd-summary-down docutils">
-<svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-down" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z" fill-rule="evenodd"></path></svg></div>
-<div class="sd-summary-up docutils">
-<svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-up" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z" fill-rule="evenodd"></path></svg></div>
-</summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">$TMP</span></code></p>
+<hr class="docutils"/>
+<section id="accessing-job-scheduler-commands">
+<h2>Accessing job scheduler commands<a class="headerlink" href="#accessing-job-scheduler-commands" title="Permalink to this headline">¶</a></h2>
+<p>By default, your account should be able to access the job scheduler commands. To verify this, try the following command on the login node:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>which qhost
+</pre></div>
 </div>
-</details><ol class="arabic simple">
-<li><p>Where can you run your computational programs?</p>
-<ul class="simple">
-<li><p>login node,</p></li>
-<li><p>compute node,</p></li>
-<li><p>In an qrsh interactive session,</p></li>
-</ul>
-</li>
-</ol>
-<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
-<summary class="sd-summary-title sd-card-header">
-Answer<div class="sd-summary-down docutils">
-<svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-down" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z" fill-rule="evenodd"></path></svg></div>
-<div class="sd-summary-up docutils">
-<svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-up" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z" fill-rule="evenodd"></path></svg></div>
-</summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Compute node or interactive session. NOT on the login node!</p>
+<p>You should see an output similar to:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/u/systems/UGE8.6.4/bin/lx-amd64/qhost
+</pre></div>
 </div>
-</details><ol class="arabic simple">
-<li><p>Which file systems are visible across all login and compute nodes?</p>
-<ul class="simple">
-<li><p>$HOME directory</p></li>
-<li><p>$SCRATCH directory</p></li>
-<li><p>$WORK directory</p></li>
-</ul>
-</li>
-</ol>
-<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
-<summary class="sd-summary-title sd-card-header">
-Answer<div class="sd-summary-down docutils">
-<svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-down" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z" fill-rule="evenodd"></path></svg></div>
-<div class="sd-summary-up docutils">
-<svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-up" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z" fill-rule="evenodd"></path></svg></div>
-</summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">$Home and $SCRATCH. Work is only locally visible on a compute node.</p>
+<p>If not, your account's <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> is not set up correctly. In that case, do one of the followings:</p>
+<ul>
+<li><p>If you are using <code class="docutils literal notranslate"><span class="pre">bash</span></code> or <code class="docutils literal notranslate"><span class="pre">zsh</span></code>, run the command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>source /u/local/bin/use-sge.sh
+</pre></div>
 </div>
-</details></section>
+</li>
+<li><p>If you are using <code class="docutils literal notranslate"><span class="pre">csh</span></code> or <code class="docutils literal notranslate"><span class="pre">tcsh</span></code>, run the command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>source /u/local/bin/usge-sge.csh
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<hr class="docutils"/>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>At this point, you should be able to do the followings:</p>
+<ul class="simple">
+<li><p>Using ssh to log in Hoffman2 Cluster from a terminal of your computer</p></li>
+<li><p>Know what login shell that your account has</p></li>
+<li><p>Be able to run job scheduler commands such as <code class="docutils literal notranslate"><span class="pre">qhost</span></code></p></li>
+</ul>
+<p>Now we are ready to proceed to start using the job scheduler! <svg aria-hidden="true" class="sd-octicon sd-octicon-thumbsup sd-text-danger" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M8.834.066C7.494-.087 6.5 1.048 6.5 2.25v.5c0 1.329-.647 2.124-1.318 2.614-.328.24-.66.403-.918.508A1.75 1.75 0 002.75 5h-1A1.75 1.75 0 000 6.75v7.5C0 15.216.784 16 1.75 16h1a1.75 1.75 0 001.662-1.201c.525.075 1.067.229 1.725.415.152.043.31.088.475.133 1.154.32 2.54.653 4.388.653 1.706 0 2.97-.153 3.722-1.14.353-.463.537-1.042.668-1.672.118-.56.208-1.243.313-2.033l.04-.306c.25-1.869.265-3.318-.188-4.316a2.418 2.418 0 00-1.137-1.2C13.924 5.085 13.353 5 12.75 5h-1.422l.015-.113c.07-.518.157-1.17.157-1.637 0-.922-.151-1.719-.656-2.3-.51-.589-1.247-.797-2.01-.884zM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.922.922 0 00-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.861 5.861 0 01-1.567.81V13.3zM2.75 6.5a.25.25 0 01.25.25v7.5a.25.25 0 01-.25.25h-1a.25.25 0 01-.25-.25v-7.5a.25.25 0 01.25-.25h1z" fill-rule="evenodd"></path></svg></p>
+</section>
 </section>
 
         </article>
@@ -321,12 +319,12 @@ Answer<div class="sd-summary-down docutils">
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="hello-world-job-script.html">
+          <a class="next-page" href="hoffman2-components.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Writing a “hello world” job script</div>
+                <div class="title">Hoffman2 Cluster Components</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -344,7 +342,7 @@ Answer<div class="sd-summary-down docutils">
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-16. |
+            Last updated on 2022-07-17. |
         </div>
         
       </footer>
@@ -363,10 +361,12 @@ Answer<div class="sd-summary-down docutils">
             <ul>
 <li><a class="reference internal" href="#">Getting Started</a><ul>
 <li><a class="reference internal" href="#get-an-account">Get an account</a></li>
-<li><a class="reference internal" href="#ssh-login">ssh login</a></li>
+<li><a class="reference internal" href="#ssh-login">SSH login</a></li>
 <li><a class="reference internal" href="#text-editing">Text editing</a></li>
+<li><a class="reference internal" href="#what-shell">What shell?</a></li>
 <li><a class="reference internal" href="#job-scheduler">Job scheduler</a></li>
-<li><a class="reference internal" href="#quiz">Quiz</a></li>
+<li><a class="reference internal" href="#accessing-job-scheduler-commands">Accessing job scheduler commands</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
 </ul>
 </li>
 </ul>

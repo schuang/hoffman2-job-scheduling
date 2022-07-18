@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
     <link rel="stylesheet" type="text/css" href="../_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/site.css" />
     
     
 
@@ -157,8 +158,10 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-job-script.html">Writing a “hello world” job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
 </ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
@@ -189,22 +192,22 @@
         <article role="main">
           <section id="job-array-or-array-jobs">
 <h1>Job array (or array jobs)<a class="headerlink" href="#job-array-or-array-jobs" title="Permalink to this headline">¶</a></h1>
-<p>A job array is a collection of similar independent jobs (called the job array “tasks”) which are identified by sequential integers (or indices), the job array task IDs.</p>
+<p>A job array is a collection of similar independent jobs (called the job array "tasks") which are identified by sequential integers (or indices), the job array task IDs.</p>
 <ul class="simple">
 <li><p>The entire job array (containing multiple tasks) has one job ID</p></li>
 <li><p>Each task has a task ID</p></li>
 </ul>
 <p>The key difference between a job array and regular (non-job array) job is the <code class="docutils literal notranslate"><span class="pre">-t</span></code> parameter, which specifies the range of the job task indices.</p>
 <p>Contiguous indices, e.g.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$ -t 1-100</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#$ -t 1-100
 </pre></div>
 </div>
 <p>will generate indices from 1 to 100.</p>
 <p>With step size, e.g.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#$ -t 1-100:10</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#$ -t 1-100:10
 </pre></div>
 </div>
-<p>will generate indices 1, 11, 21, …, 91.</p>
+<p>will generate indices 1, 11, 21, ..., 91.</p>
 <p>Each job array task can has its own input and output files, typically indexed by the task IDs. For example, task 1 reads from input 1 and produces output 1. Task 2 reads from input 2 and produces output 2. And so on.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -229,7 +232,7 @@
         </div>
 
         <div class="related-information">
-            Last updated on 2022-07-16. |
+            Last updated on 2022-07-17. |
         </div>
         
       </footer>

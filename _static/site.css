@@ -1,3 +1,8 @@
+:root {
+    --orange: rgb(255 90 13);
+}
+
+
 body {
     font-family: -apple-system,"helvetica neue",helvetica,roboto,noto,"segoe ui",arial,sans-serif;
     font-weight: 400;
@@ -7,6 +12,6 @@ body {
     background: none;
 }
 
-h2 {
+/* h2 {
     border-bottom: 1px solid lightgray;
-}
+} */
