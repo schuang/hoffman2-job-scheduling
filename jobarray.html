@@ -2,9 +2,11 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="#" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
-    <title>Search - Tutorial: Hoffman2 Cluster Job Scheduling</title><link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    
+        <title>Job arrays - Tutorial: Hoffman2 Cluster Job Scheduling</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -134,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -148,7 +150,7 @@
   
   <span class="sidebar-brand-text">Tutorial: Hoffman2 Cluster Job Scheduling</span>
   
-</a><form class="sidebar-search-container" method="get" action="#" role="search">
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
@@ -183,23 +185,135 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          
-<noscript>
-<div class="admonition error">
-  <p class="admonition-title">Error</p>
-  <p>
-    Please activate JavaScript to enable the search functionality.
-  </p>
+          <section id="job-arrays">
+<h1>Job arrays<a class="headerlink" href="#job-arrays" title="Permalink to this headline">¶</a></h1>
+<p>A job array (also loosely called array job) is a collection of similar but independent tasks which are identified by sequential integers (or indices), the job array task IDs.</p>
+<ul class="simple">
+<li><p>The entire job array (containing multiple tasks) has one job ID</p></li>
+<li><p>Each task has an unique task ID within the job</p></li>
+</ul>
+<section id="task-range-specification">
+<h2>Task range specification<a class="headerlink" href="#task-range-specification" title="Permalink to this headline">¶</a></h2>
+<p>The key difference between a job array and regular (non-job array) job is the <code class="docutils literal notranslate"><span class="pre">-t</span></code> parameter, which specifies the range of the job task indices.</p>
+<p>The syntax to specifying task range provides different ways to specify the task range.</p>
+<section id="contiguous-indices">
+<h3>Contiguous indices<a class="headerlink" href="#contiguous-indices" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#$ -t 1-100
+</pre></div>
 </div>
-</noscript>
+<p>will generate indices from 1 to 100 (i.e. 100 tasks).</p>
+</section>
+<section id="fixed-increment">
+<h3>Fixed increment<a class="headerlink" href="#fixed-increment" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#$ -t 1-100:10
+</pre></div>
+</div>
+<p>will generate indices 1, 11, 21, …, 91.</p>
+</section>
+<section id="invididual-indices">
+<h3>Invididual indices<a class="headerlink" href="#invididual-indices" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#$ -t 1,13,45,87
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>0 is not a valid task ID, i.e. the starting index must be 1 or greater.</p>
+</div>
+<p>While the job array syntax provides some flexibility of specifying the index range, additional shell programming might be needed to manipulate the task indices, as demonstrated in the examples below.</p>
+</section>
+</section>
+<hr class="docutils"/>
+<section id="example-1">
+<h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we will a Python program <code class="docutils literal notranslate"><span class="pre">foo.py</span></code> for 10 cases, each with a different input data set. Suppose the case-to-input-file mappings are:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> case     input filename
+-----------------------------
+ 1        input-1.csv
+ 2        input-2.csv
+ 3        input-3.csv
+ ...      ...
+ 10       input-10.csv
+</pre></div>
+</div>
+<p>and that the Python program <code class="docutils literal notranslate"><span class="pre">foo.py</span></code> uses the first position argument as the input file name.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+#$ -cwd
+#$ -t 1-10
+#$ -N foo
+#$ -j y
+#$ -o stdout.$JOB_ID.$TASK_ID
+#$ -l h_rt=01:00:00,h_data=2G
 
-<div id="search-results"></div>
+python3 foo.py input-"$SGE_TASK_ID".csv
+</pre></div>
+</div>
+<p>After the run, there will be 10 output files:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ls stdout*
+stdout.475262.1   stdout.475262.2  stdout.475262.3  stdout.475262.4
+stdout.475262.5   stdout.475262.6  stdout.475262.7  stdout.475262.8
+stdout.475262.9   stdout.475262.10
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">$TASK_ID</span></code> to indicate task ID in the standard output file name (<code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-o</span></code>).</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">$SGE_TASK_ID</span></code> in the job script body to access the ID of the current task.</p></li>
+</ul>
+</div>
+</section>
+<hr class="docutils"/>
+<section id="example-2">
+<h2>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
+<p>Suppose we have 5000 tasks to run, but each of the task is short. To use Hoffman2 Cluster effectively, we will bundle 500 tasks into one larger task.</p>
+<p>This job script launches 10 tasks. In each task, the for-loop runs through the 50 cases sequentially.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+#$ -cwd
+#$ -l h_data=2g,h_rt=02:00:00
+#$ -j y
+#$ -o stdout.$JOB_ID.$TASK_ID
+#$ -N jaloop
+#$ -t 1-5000:500
+
+for i in $(seq 0 499); do
+    tid=$((SGE_TASK_ID + i))
+    echo "SGE_TASK_ID = $SGE_TASK_ID  tid=$tid"
+    python3 foo.py input-"$tid".csv
+done
+</pre></div>
+</div>
+<p>In this case, a total of 10 tasks are submitted, i.e. <code class="docutils literal notranslate"><span class="pre">SGE_TASK_ID</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">501,</span> <span class="pre">1001,</span> <span class="pre">...,</span> <span class="pre">4501</span></code>.</p>
+<p>In the first task (<code class="docutils literal notranslate"><span class="pre">SGE_TASK_ID=1</span></code>), the <code class="docutils literal notranslate"><span class="pre">tid</span></code> value in the loop varies from 1 to 50, corresponding to Python program processing <code class="docutils literal notranslate"><span class="pre">input-1.csv</span></code> to <code class="docutils literal notranslate"><span class="pre">input-50.csv</span></code>.</p>
+<p>In the second task (<code class="docutils literal notranslate"><span class="pre">SGE_TASK_ID=51</span></code>), the Python program will process <code class="docutils literal notranslate"><span class="pre">input-51.csv</span></code> to <code class="docutils literal notranslate"><span class="pre">input-100.csv</span></code>. And so on.</p>
+<p>In 10th task (<code class="docutils literal notranslate"><span class="pre">SGE_TASK_ID=451</span></code>), the Python program will process <code class="docutils literal notranslate"><span class="pre">input-451.csv</span></code> to <code class="docutils literal notranslate"><span class="pre">input-500.csv</span></code>.</p>
+<p>The mapping between the job array tasks and input files is:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  SGE_TASK_ID      input file
+-------------------------------------
+  1                input-1.csv
+  1                input-2.csv
+  1                input-3.csv
+  ...              ...
+  1                input-500.csv
+  501              input-501.csv
+  ...              ...
+  501              input-1000.csv
+  1001             input-1001.csv
+  .                .
+  .                .
+  .                .
+  4501             input-4501.csv
+  ...              ...
+  4501             input-5000.csv
+</pre></div>
+</div>
+</section>
+</section>
 
         </article>
       </div>
@@ -216,8 +330,34 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Job arrays</a><ul>
+<li><a class="reference internal" href="#task-range-specification">Task range specification</a><ul>
+<li><a class="reference internal" href="#contiguous-indices">Contiguous indices</a></li>
+<li><a class="reference internal" href="#fixed-increment">Fixed increment</a></li>
+<li><a class="reference internal" href="#invididual-indices">Invididual indices</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example-1">Example 1</a></li>
+<li><a class="reference internal" href="#example-2">Example 2</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -229,8 +369,5 @@
     <script src="_static/scripts/furo.js"></script>
     <script src="_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-<script src="_static/searchtools.js"></script>
-<script src="_static/language_data.js"></script>
-<script src="searchindex.js"></script></body>
+    </body>
 </html>

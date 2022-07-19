@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     
-        <title>Example: running cellranger interactively - Tutorial: Hoffman2 Cluster Job Scheduling</title>
+        <title>&lt;no title&gt; - Tutorial: Hoffman2 Cluster Job Scheduling</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
@@ -159,8 +159,8 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">“hello world” job script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-advanced.html">Diving deeper into Hello world</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job submission</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world-advanced.html">Shell behavior in job submission</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
@@ -191,29 +191,7 @@
           </label>
         </div>
         <article role="main">
-          <section id="example-running-cellranger-interactively">
-<h1>Example: running cellranger interactively<a class="headerlink" href="#example-running-cellranger-interactively" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ qrsh -l h_rt=2:00:00,h_data=2g
-[user_id@nXXXX ~]$
-
-[user_id@nXXXX ~]$ module load cellranger
-[user_id@nXXXX ~]$ which cellranger
-/u/local/apps/cellranger/5.0.1/cellranger-5.0.1/bin/cellranger
-
-[user_id@nXXXX ~]$ cellranger -help
-cellranger cellranger-5.0.1
-Process 10x Genomics Gene Expression, Feature Barcode, and Immune Profiling data
-
-USAGE:
-    cellranger &lt;SUBCOMMAND&gt;
-
-FLAGS:
-    -h, --help       Prints help information
-    -V, --version    Prints version information
-</pre></div>
-</div>
-</section>
-
+          
         </article>
       </div>
       <footer>

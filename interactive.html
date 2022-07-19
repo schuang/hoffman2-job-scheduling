@@ -2,9 +2,11 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="#" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
-    <title>Search - Tutorial: Hoffman2 Cluster Job Scheduling</title><link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    
+        <title>Interactive jobs with qrsh - Tutorial: Hoffman2 Cluster Job Scheduling</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -134,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -148,7 +150,7 @@
   
   <span class="sidebar-brand-text">Tutorial: Hoffman2 Cluster Job Scheduling</span>
   
-</a><form class="sidebar-search-container" method="get" action="#" role="search">
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
@@ -183,23 +185,60 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          
-<noscript>
-<div class="admonition error">
-  <p class="admonition-title">Error</p>
-  <p>
-    Please activate JavaScript to enable the search functionality.
-  </p>
+          <section id="interactive-jobs-with-qrsh">
+<h1>Interactive jobs with qrsh<a class="headerlink" href="#interactive-jobs-with-qrsh" title="Permalink to this headline">¶</a></h1>
+<p>While Hoffman2 cluster’s job scheduling is optimized for processing batch jobs (to maximum computational throughput), it also supports interactive use.</p>
+<p>All of the job parameters we have learned apply to interactive jobs. However, there are some differences. For example, in an interactive job, we don’t need to specify the standard output and standard error file names.</p>
+<section id="a-simple-example">
+<h2>A simple example<a class="headerlink" href="#a-simple-example" title="Permalink to this headline">¶</a></h2>
+<p>An example of getting an interactive session with 1 CPU core, 2GB of memory, for 2 hours:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>qrsh -l h_data=2G,h_rt=1:00:00
+</pre></div>
 </div>
-</noscript>
-
-<div id="search-results"></div>
+<p><svg aria-hidden="true" class="sd-octicon sd-octicon-play sd-text-danger" height="2.0em" version="1.1" viewbox="0 0 24 24" width="2.0em"><path d="M9.5 15.584V8.416a.5.5 0 01.77-.42l5.576 3.583a.5.5 0 010 .842l-5.576 3.584a.5.5 0 01-.77-.42z"></path><path d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z" fill-rule="evenodd"></path></svg> <a class="reference internal" href="demo/qrsh.html"><span class="doc">Demo: launchnig an interactive job</span></a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">qrsh</span></code> cannot be returned within a few minutes, try shorter time (e.g. 2 hours or less) and smaller memory amount (less than 4G), if applicable.</p>
+</div>
+</section>
+<section id="a-closer-look">
+<h2>A closer look<a class="headerlink" href="#a-closer-look" title="Permalink to this headline">¶</a></h2>
+<p>The interactive session returned by <code class="docutils literal notranslate"><span class="pre">qrsh</span></code> is a login shell, different from that of a batch submission (using <code class="docutils literal notranslate"><span class="pre">qsub</span></code>). Their differences are a common source of confusion.</p>
+<ul class="simple">
+<li><p>Having a long (greater than 8 hours) qrsh session may be possible but not recommended.</p></li>
+<li><p>Long qrsh session is susceptible to network or local computer’s interruption, which may terminate the qrsh session.</p></li>
+<li><p>The wait time could be long (e.g. hours) as the job scheduler may not be able to find the computing resource immediately.</p></li>
+<li><p>You could be “wasting” CPU time, e.g. your interactive session is running but you step out for coffee.</p></li>
+<li><p>If you plan to run long qrsh sessions, consider converting them to a batch submission.</p></li>
+</ul>
+</section>
+<section id="example-rstudio-with-gui">
+<h2>Example: RStudio with GUI<a class="headerlink" href="#example-rstudio-with-gui" title="Permalink to this headline">¶</a></h2>
+<p>In this case, RStudio runs on the compute node.
+The graphical interface goes through X11 forwarding from the compute node to display on your local computer.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An X server must be installed on your local computer, e.g., <a class="reference external" href="https://www.xquartz.org/">XQuartz</a> for MacOS, <a class="reference external" href="https://mobaxterm.mobatek.net/download.html">MobaXterm</a> or <a class="reference external" href="https://sourceforge.net/projects/vcxsrv/">VcXsrv</a> for Windows.</p>
+</div>
+<p>Starting from a terminal of your local computer:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ ssh -X user_id@hoffman2.idre.ucla.edu   # from your local computer
+…
+$ qrsh -l h_rt=2:00:00,h_data=4g          # on login node
+$ module load Rstudio                     # on compute node
+$ rstudio
+</pre></div>
+</div>
+<p><svg aria-hidden="true" class="sd-octicon sd-octicon-play sd-text-danger" height="2.0em" version="1.1" viewbox="0 0 24 24" width="2.0em"><path d="M9.5 15.584V8.416a.5.5 0 01.77-.42l5.576 3.583a.5.5 0 010 .842l-5.576 3.584a.5.5 0 01-.77-.42z"></path><path d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z" fill-rule="evenodd"></path></svg> <a class="reference internal" href="demo/qrsh-rstudio.html"><span class="doc">Demo: Interactive Use of RStudio with GUI</span></a></p>
+<p>If everything goes, you should see the RStudio graphical window on your local computer that looks like this:</p>
+<img alt="rstudio in qrsh" src="_images/rstudio-qrsh.png"/>
+</section>
+</section>
 
         </article>
       </div>
@@ -216,8 +255,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Interactive jobs with qrsh</a><ul>
+<li><a class="reference internal" href="#a-simple-example">A simple example</a></li>
+<li><a class="reference internal" href="#a-closer-look">A closer look</a></li>
+<li><a class="reference internal" href="#example-rstudio-with-gui">Example: RStudio with GUI</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -229,8 +289,5 @@
     <script src="_static/scripts/furo.js"></script>
     <script src="_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-<script src="_static/searchtools.js"></script>
-<script src="_static/language_data.js"></script>
-<script src="searchindex.js"></script></body>
+    </body>
 </html>

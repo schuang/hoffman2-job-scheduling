@@ -159,8 +159,8 @@
   <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hoffman2-components.html">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world.html">“hello world” job script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world-advanced.html">Diving deeper into Hello world</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world.html">“hello world” job submission</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world-advanced.html">Shell behavior in job submission</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
@@ -227,19 +227,24 @@ use <a class="reference external" href="https://www.hoffman2.idre.ucla.edu/Accou
 <hr class="docutils"/>
 <section id="text-editing">
 <h2>Text editing<a class="headerlink" href="#text-editing" title="Permalink to this headline">¶</a></h2>
-<p>Job submission involves writing job script (a shell script saved as a text file) that specifies the job parameters and the runtime environment. Therefore, it is useful to know how to edit text files on Hoffman2 cluster.</p>
-<p>The recommended way is to edit the text file on Hoffman2 Cluster directly, using a text editors such as <code class="docutils literal notranslate"><span class="pre">nano</span></code>, <code class="docutils literal notranslate"><span class="pre">vim</span></code> or <code class="docutils literal notranslate"><span class="pre">emacs</span></code>:</p>
+<p>Job submission involves writing or editing job scripts (text files).</p>
+<p>(We will say more about job scripts later.)</p>
+<p>The recommended way of editing texts is using one of the editors <code class="docutils literal notranslate"><span class="pre">nano</span></code>, <code class="docutils literal notranslate"><span class="pre">vim</span></code> or <code class="docutils literal notranslate"><span class="pre">emacs</span></code> on Hoffman2 cluster:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">nano</span></code> is quite easy to use, highly recommended for new users.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">vim</span></code> and <code class="docutils literal notranslate"><span class="pre">emacs</span></code> are very powerful; mastering them helps you become more efficient in handling text files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nano</span></code> may be easy to use for new users.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vim</span></code> and <code class="docutils literal notranslate"><span class="pre">emacs</span></code> are powerful and have numerous features; mastering them helps you become more efficient in manipulating text files.</p></li>
+</ul>
+<p>Alternatively, you could consider:</p>
+<ul class="simple">
+<li><p>The remote editing capability of the editors on your computer (such as VSCode editor)</p></li>
+<li><p>Edit the text file on your local computer and upload it via ssh to Hoffman2 Cluster. (However, this later approach may be cumbersome and error-prone.)</p></li>
 </ul>
 <p><svg aria-hidden="true" class="sd-octicon sd-octicon-play sd-text-danger" height="2.0em" version="1.1" viewbox="0 0 24 24" width="2.0em"><path d="M9.5 15.584V8.416a.5.5 0 01.77-.42l5.576 3.583a.5.5 0 010 .842l-5.576 3.584a.5.5 0 01-.77-.42z"></path><path d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z" fill-rule="evenodd"></path></svg> <a class="reference internal" href="demo/nano-editor.html"><span class="doc">Demo: using nano text editor</span></a></p>
-<p>Alternatively, if you must, you could edit the text file on your local computer and upload it via ssh to Hoffman2 Cluster. This approach works, although it may be cumbersome.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p><strong>Attention Windows users:</strong> When transferring text files to Hoffman2 cluster, be aware of the differences of the end-of-line characters between Windows (<code class="docutils literal notranslate"><span class="pre">\r\n</span></code>) and Linux (<code class="docutils literal notranslate"><span class="pre">\n</span></code>). For example, a shell script file containing <code class="docutils literal notranslate"><span class="pre">\r\n</span></code> will not work on Hoffman2 cluster.</p></li>
-<li><p>Depending on your setup, when a file is transferred to Hoffman2 Cluster, the file permission might not be entirely correct and needs a fix (typically by the command <code class="docutils literal notranslate"><span class="pre">chmod</span></code>).</p></li>
+<li><p>Depending on your setup, when a file is transferred to Hoffman2 Cluster, the file permission might not be entirely correct and needs a fix (typically by using the command <code class="docutils literal notranslate"><span class="pre">chmod</span></code>).</p></li>
 </ul>
 </div>
 </section>
@@ -265,16 +270,11 @@ For example, your login shell may have <code class="docutils literal notranslate
 <p>Hoffman2 cluster’s job scheduler is <a class="reference external" href="https://www.altair.com/grid-engine">Altair Grid Engine</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Working definitions:</p>
 <ul class="simple">
-<li><p><strong>Job:</strong> A job is the piece of computation that the user wishes to run.</p></li>
-<li><p><strong>Job parameters:</strong> Example parameters include runtime limit and the memory size. There are many others (more on this later).</p></li>
+<li><p><strong>Job:</strong> a piece of computation, including its input/output data and runtime environment.</p></li>
+<li><p><strong>Job parameters:</strong> runtime limit, the memory size, number of CPUs, etc of a job.</p></li>
 </ul>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Understanding Hoffman2 cluster’s components, the scheduler’s parameters and how to set up the runtime environment are essential to successfully submit and run the user’s jobs.</p>
-<p>In practice, such understanding may help reducing unnecessary wait time, avoid common mistakes, or know where to look when things do not work.</p>
+<p>One learning aspect of this tutorial is about specifying the job parameters to request adequate computing resource.</p>
 </div>
 </section>
 <hr class="docutils"/>
@@ -305,13 +305,14 @@ For example, your login shell may have <code class="docutils literal notranslate
 <hr class="docutils"/>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
-<p>At this point, you should be able to do the followings:</p>
+<p>At the conclusoin of this module, you should be able to:</p>
 <ul class="simple">
-<li><p>Using ssh to log in Hoffman2 Cluster from a terminal of your computer</p></li>
-<li><p>Know what login shell that your account has</p></li>
-<li><p>Be able to run job scheduler commands such as <code class="docutils literal notranslate"><span class="pre">qhost</span></code></p></li>
+<li><p>Log in Hoffman2 Cluster from a “SSH” terminal of your computer</p></li>
+<li><p>Know your Hoffman2 account’s login shell type</p></li>
+<li><p>Know how to edit a text file on Hoffman2 Cluster</p></li>
+<li><p>Be able to run job scheduler commands such as <code class="docutils literal notranslate"><span class="pre">qhost</span></code> in your shell</p></li>
 </ul>
-<p>Now we are ready to proceed to start using the job scheduler! <svg aria-hidden="true" class="sd-octicon sd-octicon-thumbsup sd-text-danger" height="1.0em" version="1.1" viewbox="0 0 16 16" width="1.0em"><path d="M8.834.066C7.494-.087 6.5 1.048 6.5 2.25v.5c0 1.329-.647 2.124-1.318 2.614-.328.24-.66.403-.918.508A1.75 1.75 0 002.75 5h-1A1.75 1.75 0 000 6.75v7.5C0 15.216.784 16 1.75 16h1a1.75 1.75 0 001.662-1.201c.525.075 1.067.229 1.725.415.152.043.31.088.475.133 1.154.32 2.54.653 4.388.653 1.706 0 2.97-.153 3.722-1.14.353-.463.537-1.042.668-1.672.118-.56.208-1.243.313-2.033l.04-.306c.25-1.869.265-3.318-.188-4.316a2.418 2.418 0 00-1.137-1.2C13.924 5.085 13.353 5 12.75 5h-1.422l.015-.113c.07-.518.157-1.17.157-1.637 0-.922-.151-1.719-.656-2.3-.51-.589-1.247-.797-2.01-.884zM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.922.922 0 00-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.861 5.861 0 01-1.567.81V13.3zM2.75 6.5a.25.25 0 01.25.25v7.5a.25.25 0 01-.25.25h-1a.25.25 0 01-.25-.25v-7.5a.25.25 0 01.25-.25h1z" fill-rule="evenodd"></path></svg></p>
+<p>Now we are ready to proceed to the next step!</p>
 </section>
 </section>
 

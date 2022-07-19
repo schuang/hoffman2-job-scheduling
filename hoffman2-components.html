@@ -2,7 +2,7 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="“hello world” job script" href="hello-world.html" /><link rel="prev" title="Getting Started" href="getting-started.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="“hello world” job submission" href="hello-world.html" /><link rel="prev" title="Getting Started" href="getting-started.html" />
 
     
         <title>Hoffman2 Cluster Components - Tutorial: Hoffman2 Cluster Job Scheduling</title>
@@ -159,8 +159,8 @@
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world.html">“hello world” job script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world-advanced.html">Diving deeper into Hello world</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world.html">“hello world” job submission</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world-advanced.html">Shell behavior in job submission</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
@@ -193,9 +193,17 @@
         <article role="main">
           <section id="hoffman2-cluster-components">
 <h1>Hoffman2 Cluster Components<a class="headerlink" href="#hoffman2-cluster-components" title="Permalink to this headline">¶</a></h1>
-<p>You have access to several directories for different purposes:</p>
+<ul class="simple">
+<li><p>Knowing what computing resources are available are essential to successfully request adequate computing resource.</p></li>
+<li><p>Such understanding helps reducing unnecessary wait time, avoid common mistakes, or know where to look when things do not work as expected.</p></li>
+</ul>
+<section id="login-nodes">
+<h2>Login nodes<a class="headerlink" href="#login-nodes" title="Permalink to this headline">¶</a></h2>
+<p>When you use “SSH” to log in Hoffman2 Cluster, you are on the login nodes. As instructed in the <a class="reference external" href="https://www.hoffman2.idre.ucla.edu/">Hoffman2 Cluster documentation</a>, you are not supposed to run computations on the login nodes. The login nodes are primarily used for editing files, submit jobs or inspect job status.</p>
+</section>
 <section id="file-systems">
 <h2>File systems<a class="headerlink" href="#file-systems" title="Permalink to this headline">¶</a></h2>
+<p>There are several different file systems (directories) for different purposes:</p>
 <div class="table-wrapper"><table class="colwidths-given docutils align-default">
 <colgroup>
 <col style="width: 21%"/>
@@ -211,17 +219,17 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>home</p></td>
+<tr class="row-even"><td><p>“home”</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">$HOME</span></code></p></td>
 <td><p>40 GB</p></td>
 <td><p>same as your account</p></td>
 </tr>
-<tr class="row-odd"><td><p>scratch</p></td>
+<tr class="row-odd"><td><p>“scratch”</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">$SCRATCH</span></code></p></td>
 <td><p>2 TB</p></td>
 <td><p>2 weeks</p></td>
 </tr>
-<tr class="row-even"><td><p>work</p></td>
+<tr class="row-even"><td><p>“work”</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">$TMPDIR</span></code></p></td>
 <td><p>100+ GB (local SSD)</p></td>
 <td><p>deleted after job termination</p></td>
@@ -253,28 +261,72 @@
 </li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">$TMPDIR</span></code> directory, local to a compute node and not visible from other compute nodes and login nodes, is useful for use cases that can take advantage of very fast disk I/O. This directory only exists during the runtime of a job.</p></li>
 </ul>
-<p>Examples of the directory names:</p>
+</section>
+<section id="exercises">
+<h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h3>
+<p>Try the following commands from your Hoffman2 login terminal.</p>
+<ol class="arabic">
+<li><p>Show your home directory path:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo $HOME
+</pre></div>
+</div>
+</li>
+<li><p>Show your scratch path:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>echo $SCRATCH
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">$HOME</span></code>: <code class="docutils literal notranslate"><span class="pre">/u/home/b/bruin</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">$SCRATCH</span></code>: <code class="docutils literal notranslate"><span class="pre">/u/scratch/b/bruin</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">$TMPDIR</span></code>: <code class="docutils literal notranslate"><span class="pre">/work/1234.1.pod_smp.q</span></code> (different for different jobs, on different compute nodes)</p></li>
 <li><p>Purchased storage: <code class="docutils literal notranslate"><span class="pre">/u/project/PI_name/...</span></code></p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>It is advisable to use the environment variable names, such as <code class="docutils literal notranslate"><span class="pre">$SCRATCH</span></code>, in your job scripts
-instead of “hard-wiring” the full paths.</p>
-</div>
 </section>
 </section>
 <hr class="docutils"/>
-<section id="cpu-architectures">
-<h2>CPU architectures<a class="headerlink" href="#cpu-architectures" title="Permalink to this headline">¶</a></h2>
+<section id="cpu-types">
+<h2>CPU types<a class="headerlink" href="#cpu-types" title="Permalink to this headline">¶</a></h2>
 <p>Hoffman2 Cluster consists of hundreds of compute nodes. The compute nodes were purchased at different times. Consequently, there is a variety of CPU models associated with the compute nodes.</p>
 <p>To see a list of compute nodes, use the command:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>qhost
 </pre></div>
 </div>
+<p>As of 2022, most of the compute nodes have Intel gold- and Intel E5-class CPUs. Depending on your account type, you may have access to a subset of the listed compute nodes.</p>
+<p>For example, in the output:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ qhost -h n1866
+HOSTNAME     ARCH         NCPU NSOC NCOR NTHR NLOAD  MEMTOT  MEMUSE  SWAPTO  SWAPUS
+-----------------------------------------------------------------------------------
+...
+n1866        intel-gold-62  36    2   36   36  0.91  188.6G   11.3G    1.9G   64.7M
+...
+</pre></div>
+</div>
+<p>Some of the key columns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HOSTNAME</span></code>: the compute node’s name</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ARCH</span></code>: the CPU type (<strong>note</strong>: it is truncated, unfortunately.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NCOR</span></code>: the number of cores on the compute node</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MEMTOT</span></code>: total memory of the node</p></li>
+</ul>
+<p>Later on in the tutorial, we will learn how to specify CPU/memory resources, if needed, in a job submission.</p>
+</section>
+<hr class="docutils"/>
+<section id="gpu-nodes">
+<h2>GPU nodes<a class="headerlink" href="#gpu-nodes" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of GPU nodes to support GPU computing.</p>
+<p>See the <a class="reference internal" href="gpu.html"><span class="doc">GPU module</span></a> for more details.</p>
+</section>
+<hr class="docutils"/>
+<section id="infiniband-networking">
+<h2>InfiniBand Networking<a class="headerlink" href="#infiniband-networking" title="Permalink to this headline">¶</a></h2>
+<p>Most of Hoffman2 Cluster’s compute nodes are connected by Infiniband (IB) networking, which is suitable for running MPI-style parallel jobs across compute nodes efficiently.</p>
+<p>It is important to use an MPI library that supports Infiniband to take advantage of its high-speed and low latency features. If the MPI code uns across Ethernet networking, it may still work but the general communication speed might slower by an order of magnitude.</p>
+<p>See the <a class="reference external" href="mpi.rst">MPI module</a> for more information.</p>
 </section>
 <hr class="docutils"/>
 <section id="quiz">
@@ -346,7 +398,7 @@ Answer<div class="sd-summary-down docutils">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">“hello world” job script</div>
+                <div class="title">“hello world” job submission</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -382,11 +434,16 @@ Answer<div class="sd-summary-down docutils">
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Hoffman2 Cluster Components</a><ul>
+<li><a class="reference internal" href="#login-nodes">Login nodes</a></li>
 <li><a class="reference internal" href="#file-systems">File systems</a><ul>
 <li><a class="reference internal" href="#use-scenarios">Use scenarios</a></li>
+<li><a class="reference internal" href="#exercises">Exercises</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#cpu-architectures">CPU architectures</a></li>
+<li><a class="reference internal" href="#cpu-types">CPU types</a></li>
+<li><a class="reference internal" href="#gpu-nodes">GPU nodes</a></li>
+<li><a class="reference internal" href="#infiniband-networking">InfiniBand Networking</a></li>
 <li><a class="reference internal" href="#quiz">Quiz</a></li>
 </ul>
 </li>

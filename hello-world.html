@@ -2,10 +2,10 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Diving deeper into Hello world" href="hello-world-advanced.html" /><link rel="prev" title="Hoffman2 Cluster Components" href="hoffman2-components.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Shell behavior in job submission" href="hello-world-advanced.html" /><link rel="prev" title="Hoffman2 Cluster Components" href="hoffman2-components.html" />
 
     
-        <title>“hello world” job script - Tutorial: Hoffman2 Cluster Job Scheduling</title>
+        <title>“hello world” job submission - Tutorial: Hoffman2 Cluster Job Scheduling</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
@@ -159,8 +159,8 @@
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hoffman2-components.html">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">“hello world” job script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world-advanced.html">Diving deeper into Hello world</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">“hello world” job submission</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world-advanced.html">Shell behavior in job submission</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
@@ -191,37 +191,78 @@
           </label>
         </div>
         <article role="main">
-          <section id="hello-world-job-script">
-<h1>“hello world” job script<a class="headerlink" href="#hello-world-job-script" title="Permalink to this headline">¶</a></h1>
-<p>In this tutorial, we will create a simple job script, submit it, wait for it to complete, and inspect its output files.</p>
+          <section id="hello-world-job-submission">
+<h1>“hello world” job submission<a class="headerlink" href="#hello-world-job-submission" title="Permalink to this headline">¶</a></h1>
+<p>In this tutorial, we will create a simple job script, submit it, wait for it to complete, inspect its output files and study its behaviors.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>A <strong>job script</strong> is just a standard shell script with additional lines containing job parameters. Some people might call it  a “command file” or “job file” but really it is just a shell script. All of your shell script programming knowledge applies!</p>
+<p>A <strong>job script</strong> is a standard shell script with additional lines containing job parameters. Some people might call it  a “command file” or “job file” but really it is just a shell script. All of your shell script programming knowledge applies!</p>
 </div>
 <p><svg aria-hidden="true" class="sd-octicon sd-octicon-play sd-text-danger" height="2.0em" version="1.1" viewbox="0 0 24 24" width="2.0em"><path d="M9.5 15.584V8.416a.5.5 0 01.77-.42l5.576 3.583a.5.5 0 010 .842l-5.576 3.584a.5.5 0 01-.77-.42z"></path><path d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z" fill-rule="evenodd"></path></svg> <a class="reference internal" href="demo/qsub-hello-world.html"><span class="doc">Demo: Submitting the hello-world job</span></a></p>
-<section id="create-the-job-script">
-<h2>Create the job script<a class="headerlink" href="#create-the-job-script" title="Permalink to this headline">¶</a></h2>
+<section id="create-a-job-script">
+<h2>Create a job script<a class="headerlink" href="#create-a-job-script" title="Permalink to this headline">¶</a></h2>
 <p>Log in Hoffman2 Cluster via a SSH terminal.</p>
-<p>Create and enter a directory (folder) <code class="docutils literal notranslate"><span class="pre">tutorial-job-sched</span></code> in your home directory:</p>
+<p>Create and enter a directory (folder) <code class="docutils literal notranslate"><span class="pre">tutorial-job-sched</span></code> in your home directory (so the exercises do not mess up your other files and directories) by typing these commands in a terminal:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mkdir tutorial-job-sched
 cd tutorial-job-sched
 </pre></div>
 </div>
-<p>Using a text editor, create the following job script [<a class="reference download internal" download="" href="_downloads/b94e1e11e144344678901971aa3cfd18/hello-world.sh"><code class="xref download docutils literal notranslate"><span class="pre">download</span></code></a>]. Then save this file as <code class="docutils literal notranslate"><span class="pre">hello-world.sh</span></code> (under the <code class="docutils literal notranslate"><span class="pre">tutorial-job-sched</span></code> directory).</p>
+<p>Using a text editor to create the following job script [<a class="reference download internal" download="" href="_downloads/e7f0f2cfbede93824c6a0aec621b71c9/hello-world-1.sh"><code class="xref download docutils literal notranslate"><span class="pre">download</span></code></a>]. Then save this file as <code class="docutils literal notranslate"><span class="pre">hello-world.sh</span></code> (under the <code class="docutils literal notranslate"><span class="pre">tutorial-job-sched</span></code> directory).</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
-#$ -l h_data=2G
+#$ -l h_data=1G
 #$ -l h_rt=1:00:00
-#$ -N myjob
-#$ -o stdout.$JOB_ID
-#$ -e stderr.$JOB_ID
 #$ -cwd
 
 echo "hello world!"
-hostname
 date
-uname -a
 </pre></div>
 </div>
+</section>
+<section id="submit-the-job">
+<h2>Submit the job<a class="headerlink" href="#submit-the-job" title="Permalink to this headline">¶</a></h2>
+<p>From the directory <code class="docutils literal notranslate"><span class="pre">tutorial-job-sched</span></code>, submit the job by the command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>qsub hello-world.sh
+</pre></div>
+</div>
+<p>On the screen, you will see a message, similar to:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Your job 3455432 (""hello-world.sh"") has been submitted
+</pre></div>
+</div>
+<p>The long integer in the message above is the job number (also called “job ID”).</p>
+</section>
+<section id="monitor-job-status">
+<h2>Monitor job status<a class="headerlink" href="#monitor-job-status" title="Permalink to this headline">¶</a></h2>
+<p>After submission, you can check the job status by the command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>qstat -u $USER
+</pre></div>
+</div>
+<p>You should see an output similar to:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>job-ID   prior  name         user    state submit/start at      queue   jclass slots ja-task-ID
+--------------------------------------------------------------------------------------------
+3455432 0.00000 hello-worl   sch      qw   07/17/2022 16:36:16                   1
+</pre></div>
+</div>
+<p>If you have successfully submitted the job, but <code class="docutils literal notranslate"><span class="pre">qstate</span> <span class="pre">-u</span> <span class="pre">$USER</span></code> shows nothing, the job may have completed (or aborted).</p>
+<p>In the above output, <code class="docutils literal notranslate"><span class="pre">qw</span></code> means the job is still pending in the queue, not started yet.</p>
+<p>At some point, the job state will change from <code class="docutils literal notranslate"><span class="pre">qw</span></code> to <code class="docutils literal notranslate"><span class="pre">r</span></code> (running) and runs to completion.</p>
+</section>
+<section id="the-output-files">
+<h2>The output files<a class="headerlink" href="#the-output-files" title="Permalink to this headline">¶</a></h2>
+<p>After the job has completed, there are two files in the directory <code class="docutils literal notranslate"><span class="pre">~/tutorial-job-sched</span></code> (recall that we used the job option <code class="docutils literal notranslate"><span class="pre">-cwd</span></code> to run in the “current” directory.):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd ~/tutorial-job-sched
+ls -l
+</pre></div>
+</div>
+<p>You will see output files similar to the followings, among other things:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>hello-world.sh.e3455432
+hello-world.sh.o3455432
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The file name ending <code class="docutils literal notranslate"><span class="pre">.e3455432</span></code> is from the standard error.</p></li>
+<li><p>The file name ending <code class="docutils literal notranslate"><span class="pre">.o3455432</span></code> is from the standard output.</p></li>
+</ul>
+<p>Unlike running a program interactively in a terminal, there is no “screen” attached to a batch job. All of outputs from from standard output and standard error are written into these two files, respectively.</p>
 </section>
 <section id="what-does-it-mean">
 <h2>What does it mean?<a class="headerlink" href="#what-does-it-mean" title="Permalink to this headline">¶</a></h2>
@@ -241,100 +282,96 @@ uname -a
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">#!/bin/bash</span></code></p></td>
 <td><p>This job script is a <code class="docutils literal notranslate"><span class="pre">bash</span></code> script</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-l</span> <span class="pre">h_data=2G</span></code></p></td>
-<td><p>At runtime, the job is limited to 2GB of virtual memory</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-l</span> <span class="pre">h_data=1G</span></code></p></td>
+<td><p>The job is limited to 2GB of virtual memory at runtime</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-l</span> <span class="pre">h_rt=1:00:00</span></code></p></td>
-<td><p>The job’s runtime limit is 1 hour.</p></td>
+<td><p>The job’s runtime limit is 1 hour (<code class="docutils literal notranslate"><span class="pre">HH:MM:SS</span></code> format)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-N</span> <span class="pre">myjob</span></code></p></td>
-<td><p>The job’s name (can be any string without spaces)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-cwd</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-cwd</span></code></p></td>
 <td><p>When the job starts, it will start from the current directory</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-o</span> <span class="pre">stdout.$JOB_ID</span></code></p></td>
-<td><p>The runtime standard output will be saved in this file</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">#$</span> <span class="pre">-e</span> <span class="pre">stderr.$JOB_ID</span></code></p></td>
-<td><p>The runtime standard error will be saved in this file</p></td>
 </tr>
 </tbody>
 </table></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you know Linux shell scripting, you will notice that the lines starting with <code class="docutils literal notranslate"><span class="pre">#</span></code> (except for <code class="docutils literal notranslate"><span class="pre">#!</span></code>, the <a class="reference external" href="https://en.wikipedia.org/wiki/Shebang_(Unix)#:~:text=In%20computing%2C%20a%20shebang%20is,bang%2C%20or%20hash%2Dpling.">shebang</a> line) are just comments from the standard point of a shell script. Indeed, when a job script is run as a normal shell script, these <code class="docutils literal notranslate"><span class="pre">#</span></code> lines are just comments, as expected. However, when this shell script is <em>submitted to the job scheduler</em>, these lines will be recognized as job parameters by the scheduler, and the specified computing resources will be requested accordingly.</p>
+<p>If you know Linux shell scripting, you will notice that the lines starting with <code class="docutils literal notranslate"><span class="pre">#</span></code> (except for <code class="docutils literal notranslate"><span class="pre">#!</span></code>, the <a class="reference external" href="https://en.wikipedia.org/wiki/Shebang_(Unix)#:~:text=In%20computing%2C%20a%20shebang%20is,bang%2C%20or%20hash%2Dpling.">shebang</a> line) are comments a shell script point of view. However, when this shell script is <em>submitted to the job scheduler</em>, these <code class="docutils literal notranslate"><span class="pre">#$</span></code> lines will be recognized as job parameters by the scheduler.</p>
 </div>
-</section>
-<section id="submit-the-job">
-<h2>Submit the job<a class="headerlink" href="#submit-the-job" title="Permalink to this headline">¶</a></h2>
-<p>From the directory <code class="docutils literal notranslate"><span class="pre">tutorial-job-sched</span></code>, submit the job by the following command:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>qsub hello-world.sh
+<p>We did not specify a job name, so by default the script’s file name is used as the job name. Also, the standard output and standard error filenames also contain the job name.</p>
+<p>We can specify the job name by the <code class="docutils literal notranslate"><span class="pre">-N</span></code> option:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#$ -N myjob
 </pre></div>
 </div>
-<p>On the scree, you will see a message, similar to:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Your job 3455432 ("myjob") has been submitted
+<p>Also, all of the <code class="docutils literal notranslate"><span class="pre">-l</span></code> options may be combined into one line (order does not matter, but space is not permitted):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#$ -l h_rt=1:00:00,h_data=1G
 </pre></div>
 </div>
-<p>The number is the job ID. The name in the quotes is the job name specified by the <code class="docutils literal notranslate"><span class="pre">-N</span></code> option mentioned above.</p>
-</section>
-<section id="monitor-job-status">
-<h2>Monitor job status<a class="headerlink" href="#monitor-job-status" title="Permalink to this headline">¶</a></h2>
-<p>After submission, you can check the job status by the command:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>qstat -u $USER
+<p>If desired, we could combine the standard output and standard error into one file by the <code class="docutils literal notranslate"><span class="pre">-j</span></code> option:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#$ -j y
 </pre></div>
 </div>
-<p>You should see an output similar to:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>job-ID   prior  name    user    state submit/start at      queue   jclass slots ja-task-ID
---------------------------------------------------------------------------------------------
-3455432 0.00000 myjob   sch      qw   07/17/2022 16:36:16                   1
+<p>The resulting job script is [<a class="reference download internal" download="" href="_downloads/ee8c7f97e5eee02a53ac10e19d00ee43/hello-world-2.sh"><code class="xref download docutils literal notranslate"><span class="pre">download</span></code></a>]:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+#$ -l h_data=1G,h_rt=1:00:00
+#$ -cwd
+#$ -j y
+#$ -N myjob
+
+echo "hello world!"
+date
 </pre></div>
 </div>
-<p>If you have successfully submitted the job, but <code class="docutils literal notranslate"><span class="pre">qstate</span> <span class="pre">-u</span> <span class="pre">$USER</span></code> shows nothing, the job may have completed.</p>
-<p>In the above output, <code class="docutils literal notranslate"><span class="pre">qw</span></code> means the job is still pending in the queue, not started yet.</p>
-<p>At some point, the job state will change from <code class="docutils literal notranslate"><span class="pre">qw</span></code> to <code class="docutils literal notranslate"><span class="pre">r</span></code> (running). After the job has completed, you won’t see the job in the <code class="docutils literal notranslate"><span class="pre">qstat</span></code> output.</p>
-</section>
-<section id="inspect-the-job-output">
-<h2>Inspect the job output<a class="headerlink" href="#inspect-the-job-output" title="Permalink to this headline">¶</a></h2>
-<p>After the job has completed, there will be at least two files in the directory <code class="docutils literal notranslate"><span class="pre">~/tutorial-job-sched</span></code> (recall that we used the job option <code class="docutils literal notranslate"><span class="pre">-cwd</span></code> to run in the “current” directory.):</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd ~/tutorial-job-sched
-ls -l
+<p>This job will produce only one output file, e.g. <code class="docutils literal notranslate"><span class="pre">myjob.o3478770</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cat myjob.o3478770
+hello world!
+Mon Jul 18 15:42:10 PDT 2022
 </pre></div>
 </div>
-<p>You should see an output similar to the following, among other things:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>-rw-r--r--. 1 sch sch   0 Jul 17 16:36 stderr.3455432
--rw-r--r--. 1 sch sch 149 Jul 17 16:21 stdout.3455432
+<p>If other standard output/error file names are preferred, they can be specified by the <code class="docutils literal notranslate"><span class="pre">-e</span></code> (standard error) and <code class="docutils literal notranslate"><span class="pre">-o</span></code> (standard output) options. To distinguish the output files from different job ID, we could utilize the runtime variable <code class="docutils literal notranslate"><span class="pre">$JOB_ID</span></code> as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#$ -o output.$JOB_ID
 </pre></div>
 </div>
-<p><svg aria-hidden="true" class="sd-octicon sd-octicon-play sd-text-danger" height="2.0em" version="1.1" viewbox="0 0 24 24" width="2.0em"><path d="M9.5 15.584V8.416a.5.5 0 01.77-.42l5.576 3.583a.5.5 0 010 .842l-5.576 3.584a.5.5 0 01-.77-.42z"></path><path d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z" fill-rule="evenodd"></path></svg> <a class="reference internal" href="demo/qsub-hello-world.html"><span class="doc">Demo: Submitting the hello-world job</span></a></p>
+<p>The resulting job script is [<a class="reference download internal" download="" href="_downloads/0b37839a7c98ef65e4f37d4ce85d2eb4/hello-world-3.sh"><code class="xref download docutils literal notranslate"><span class="pre">download</span></code></a>]:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+#$ -l h_data=1G,h_rt=1:00:00
+#$ -cwd
+#$ -j y
+#$ -N myjob
+#$ -o output.$JOB_NAME.$JOB_ID
+
+echo "hello world!"
+date
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following runtime variables are supported in the <code class="docutils literal notranslate"><span class="pre">-e</span></code> and <code class="docutils literal notranslate"><span class="pre">-o</span></code> options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$HOME</span></code>: home directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$USER</span></code>: user ID of job owner</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$JOB_ID</span></code>: job ID</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$JOB_NAME</span></code> job name (see -N option)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$HOSTNAME</span></code> name of the compute node</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$TASK_ID</span></code> array job task index number (only for job arrays)</p></li>
+</ul>
+</div>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
-<p>In this exercise, we have performed the following tasks:</p>
+<p>At the conclusion of this module, you should be able to:</p>
 <ul class="simple">
-<li><p>Create a simple job script, which is a shell script with additional “comment” lines specifying the job parameters</p></li>
+<li><p>Create a simple job script</p></li>
 <li><p>Submit the job</p></li>
 <li><p>Check (or monitor) job status</p></li>
 <li><p>Inspect the job output files</p></li>
+<li><p>Alter the default behavior of job names, output files, etc.</p></li>
 </ul>
-<p>We have also learned that:</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>Two ways to specify job parameters</dt><dd><ul>
-<li><p>In the job script, i.e. the <code class="docutils literal notranslate"><span class="pre">#$</span></code> lines</p></li>
-<li><p>from the command line</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><p>standard output and standard error can be combined</p></li>
-<li><p>Job parameters can contain special runtime variables, such as <code class="docutils literal notranslate"><span class="pre">$JOB_ID</span></code></p></li>
-</ul>
+<p><svg aria-hidden="true" class="sd-octicon sd-octicon-play sd-text-danger" height="2.0em" version="1.1" viewbox="0 0 24 24" width="2.0em"><path d="M9.5 15.584V8.416a.5.5 0 01.77-.42l5.576 3.583a.5.5 0 010 .842l-5.576 3.584a.5.5 0 01-.77-.42z"></path><path d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z" fill-rule="evenodd"></path></svg> <a class="reference internal" href="demo/qsub-hello-world.html"><span class="doc">Demo: Submitting the hello-world job</span></a></p>
 </section>
 <section id="quiz">
 <h2>Quiz<a class="headerlink" href="#quiz" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li><p>What is wrong with this job script?</p></li>
+<li><p>What is/are wrong in this job script?</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
 #$ -l h_data = 2G
@@ -354,8 +391,9 @@ Answer<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-up" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z" fill-rule="evenodd"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">There are two problems:</p>
 <ol class="arabic simple">
-<li><p class="sd-card-text">The runtime variable <code class="docutils literal notranslate"><span class="pre">JOBID</span></code> is undefined. It should be <code class="docutils literal notranslate"><span class="pre">$JOB_ID</span></code> instead.</p></li>
+<li><p class="sd-card-text">The runtime variable <code class="docutils literal notranslate"><span class="pre">$JOBID</span></code> is misspelled (therefore undefined). It should be <code class="docutils literal notranslate"><span class="pre">$JOB_ID</span></code> instead.</p></li>
 <li><p class="sd-card-text">Space is not allowed in specifying the job parameters. It should be <code class="docutils literal notranslate"><span class="pre">h_data=2GB</span></code> and <code class="docutils literal notranslate"><span class="pre">h_rt=1:00:00</span></code>, respectively.</p></li>
 </ol>
 </div>
@@ -372,7 +410,7 @@ Answer<div class="sd-summary-down docutils">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Diving deeper into Hello world</div>
+                <div class="title">Shell behavior in job submission</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -407,12 +445,12 @@ Answer<div class="sd-summary-down docutils">
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">“hello world” job script</a><ul>
-<li><a class="reference internal" href="#create-the-job-script">Create the job script</a></li>
-<li><a class="reference internal" href="#what-does-it-mean">What does it mean?</a></li>
+<li><a class="reference internal" href="#">“hello world” job submission</a><ul>
+<li><a class="reference internal" href="#create-a-job-script">Create a job script</a></li>
 <li><a class="reference internal" href="#submit-the-job">Submit the job</a></li>
 <li><a class="reference internal" href="#monitor-job-status">Monitor job status</a></li>
-<li><a class="reference internal" href="#inspect-the-job-output">Inspect the job output</a></li>
+<li><a class="reference internal" href="#the-output-files">The output files</a></li>
+<li><a class="reference internal" href="#what-does-it-mean">What does it mean?</a></li>
 <li><a class="reference internal" href="#summary">Summary</a></li>
 <li><a class="reference internal" href="#quiz">Quiz</a></li>
 </ul>

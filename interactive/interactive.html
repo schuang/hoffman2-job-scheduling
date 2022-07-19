@@ -2,14 +2,16 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="#" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
-    <title>Search - Tutorial: Hoffman2 Cluster Job Scheduling</title><link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
-    <link rel="stylesheet" type="text/css" href="_static/dia.css" />
-    <link rel="stylesheet" type="text/css" href="_static/site.css" />
+    
+        <title>Interactive jobs - Tutorial: Hoffman2 Cluster Job Scheduling</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
+    <link rel="stylesheet" type="text/css" href="../_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/site.css" />
     
     
 
@@ -123,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">Tutorial: Hoffman2 Cluster Job Scheduling</div></a>
+      <a href="../index.html"><div class="brand">Tutorial: Hoffman2 Cluster Job Scheduling</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -143,26 +145,26 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
   <span class="sidebar-brand-text">Tutorial: Hoffman2 Cluster Job Scheduling</span>
   
-</a><form class="sidebar-search-container" method="get" action="#" role="search">
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hoffman2-components.html">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world.html">“hello world” job submission</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world-advanced.html">Shell behavior in job submission</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world-advanced.html">Diving deeper into Hello world</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="appendix/ssh.html">Using secure client (ssh)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
 
 </div>
@@ -189,17 +191,41 @@
           </label>
         </div>
         <article role="main">
-          
-<noscript>
-<div class="admonition error">
-  <p class="admonition-title">Error</p>
-  <p>
-    Please activate JavaScript to enable the search functionality.
-  </p>
+          <section id="interactive-jobs">
+<h1>Interactive jobs<a class="headerlink" href="#interactive-jobs" title="Permalink to this headline">¶</a></h1>
+<p>Recall the comments in <a class="reference internal" href="../intro/index.html#login-node-vs-compute-node"><span class="std std-ref">Login nodes vs. compute nodes</span></a>.</p>
+<p>An example of getting an interactive session with 1 CPU core, 2GB of memory, for 2 hours:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>qrsh -l h_data=2G,h_rt=2:00:00
+</pre></div>
 </div>
-</noscript>
-
-<div id="search-results"></div>
+<p>Details:</p>
+<ul>
+<li><p>By default, 1 CPU core is used.</p></li>
+<li><p>There should be no space in between the items among the <code class="docutils literal notranslate"><span class="pre">-l</span></code> options. Adding spaces causes errors.</p></li>
+<li><p>There will some wait time, especially when requesting longer time or a larger memory size.</p></li>
+<li><p>When <code class="docutils literal notranslate"><span class="pre">qrsh</span></code> cannot be returned within a few minutes, try shorter time (e.g. 2 hours or less) and smaller memory amount, if applicable.</p></li>
+<li><p>The interactive session returned by <code class="docutils literal notranslate"><span class="pre">qrsh</span></code> is a login shell, different from that of a batch submission (using <code class="docutils literal notranslate"><span class="pre">qsub</span></code>). Their differences are a common source of confusion. (A login shell is initialized differently from a non-login shell.)</p></li>
+<li><p>Having a long qrsh session is possible but not recommended.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Long qrsh session is susceptible to interruption, which may terminate the session.</p></li>
+<li><p>The wait time could be long (e.g. hours)</p></li>
+<li><p>You could be “wasting” CPU time: occupying the CPUs and memory while idling.</p></li>
+<li><p>If you plan to run long qrsh sessions, consider converting it to a batch submission.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>More details about <code class="docutils literal notranslate"><span class="pre">h_rt</span></code> and <code class="docutils literal notranslate"><span class="pre">h_data</span></code>:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="h_rt.html">Time limit: <code class="docutils literal notranslate"><span class="pre">h_rt</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="h_data.html">Memory limit: <code class="docutils literal notranslate"><span class="pre">h_data</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="ex1.html">Example: running cellranger interactively</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ex2.html">Example: running RStudio interactively with graphical interface</a></li>
+</ul>
+</div>
+</section>
 
         </article>
       </div>
@@ -222,15 +248,12 @@
       
     </aside>
   </div>
-</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/furo.js"></script>
-    <script src="_static/design-tabs.js"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-<script src="_static/searchtools.js"></script>
-<script src="_static/language_data.js"></script>
-<script src="searchindex.js"></script></body>
+    </body>
 </html>

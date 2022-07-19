@@ -2,14 +2,16 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="#" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
-    <title>Search - Tutorial: Hoffman2 Cluster Job Scheduling</title><link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
-    <link rel="stylesheet" type="text/css" href="_static/dia.css" />
-    <link rel="stylesheet" type="text/css" href="_static/site.css" />
+    
+        <title>Job array (or array jobs) - Tutorial: Hoffman2 Cluster Job Scheduling</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
+    <link rel="stylesheet" type="text/css" href="../_static/dia.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/site.css" />
     
     
 
@@ -123,7 +125,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">Tutorial: Hoffman2 Cluster Job Scheduling</div></a>
+      <a href="../index.html"><div class="brand">Tutorial: Hoffman2 Cluster Job Scheduling</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -134,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -143,26 +145,26 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
   <span class="sidebar-brand-text">Tutorial: Hoffman2 Cluster Job Scheduling</span>
   
-</a><form class="sidebar-search-container" method="get" action="#" role="search">
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hoffman2-components.html">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world.html">“hello world” job submission</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world-advanced.html">Shell behavior in job submission</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job submission</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world-advanced.html">Shell behavior in job submission</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="appendix/ssh.html">Using secure client (ssh)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/ssh.html">Using secure client (ssh)</a></li>
 </ul>
 
 </div>
@@ -183,23 +185,130 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          
-<noscript>
-<div class="admonition error">
-  <p class="admonition-title">Error</p>
-  <p>
-    Please activate JavaScript to enable the search functionality.
-  </p>
+          <section id="job-array-or-array-jobs">
+<h1>Job array (or array jobs)<a class="headerlink" href="#job-array-or-array-jobs" title="Permalink to this headline">¶</a></h1>
+<p>A job array is a collection of similar independent jobs (called the job array "tasks") which are identified by sequential integers (or indices), the job array task IDs.</p>
+<ul class="simple">
+<li><p>The entire job array (containing multiple tasks) has one job ID</p></li>
+<li><p>Each task has a task ID</p></li>
+</ul>
+<p>The key difference between a job array and regular (non-job array) job is the <code class="docutils literal notranslate"><span class="pre">-t</span></code> parameter, which specifies the range of the job task indices.</p>
+<p>Contiguous indices, e.g.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#$ -t 1-100
+</pre></div>
 </div>
-</noscript>
+<p>will generate indices from 1 to 100.</p>
+<p>With step size, e.g.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#$ -t 1-100:10
+</pre></div>
+</div>
+<p>will generate indices 1, 11, 21, ..., 91.</p>
+<p>Each job array task can has its own input and output files, typically indexed by the task IDs. For example, task 1 reads from input 1 and produces output 1. Task 2 reads from input 2 and produces output 2. And so on.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>0 is not a valid task ID, i.e. the starting index must be 1 or greater.</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ex2.html">Example 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quiz1.html">Exercises</a></li>
+</ul>
+</div>
+<section id="example-1">
+<h2>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+#$ -cwd
+#$ -t 1-10
+#$ -N test
+#$ -j y
+#$ -o stdout.$JOB_ID.$TASK_ID
+#$ -l h_rt=00:10:00,h_data=1g
 
-<div id="search-results"></div>
+echo 'hello' $SGE_TASK_ID
+</pre></div>
+</div>
+<p>After the run, there will be 10 output files:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ls stdout*
+stdout.475262.1   stdout.475262.2  stdout.475262.4  stdout.475262.6  stdout.475262.8
+stdout.475262.10  stdout.475262.3  stdout.475262.5  stdout.475262.7  stdout.475262.9
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cat stdout.475262.1
+hello 1
+</pre></div>
+</div>
+</section>
+<hr class="docutils"/>
+<section id="example-2">
+<h2>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+#$ -cwd
+#$ -l h_data=2g,h_rt=00:10:00
+#$ -j y
+#$ -o stdout.$JOB_ID.$TASK_ID
+#$ -N ja-loop
+#$ -t 1-100:10
+
+for i in `seq 0 9`; do
+tid=$((SGE_TASK_ID + i))
+echo "SGE_TASK_ID = $SGE_TASK_ID  tid=$tid"
+done
+</pre></div>
+</div>
+<p>After the run, there will be 10 output files in the current directory:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ls stdout*
+stdout.474858.1   stdout.474858.21  stdout.474858.41  stdout.474858.61  stdout.474858.81
+stdout.474858.11  stdout.474858.31  stdout.474858.51  stdout.474858.71  stdout.474858.91
+
+$ cat stdout.474858.1
+SGE_TASK_ID = 1  tid=1
+SGE_TASK_ID = 1  tid=2
+SGE_TASK_ID = 1  tid=3
+SGE_TASK_ID = 1  tid=4
+SGE_TASK_ID = 1  tid=5
+SGE_TASK_ID = 1  tid=6
+SGE_TASK_ID = 1  tid=7
+SGE_TASK_ID = 1  tid=8
+SGE_TASK_ID = 1  tid=9
+SGE_TASK_ID = 1  tid=10
+
+
+$ cat stdout.474858.11
+SGE_TASK_ID = 11  tid=11
+SGE_TASK_ID = 11  tid=12
+SGE_TASK_ID = 11  tid=13
+SGE_TASK_ID = 11  tid=14
+SGE_TASK_ID = 11  tid=15
+SGE_TASK_ID = 11  tid=16
+SGE_TASK_ID = 11  tid=17
+SGE_TASK_ID = 11  tid=18
+SGE_TASK_ID = 11  tid=19
+SGE_TASK_ID = 11  tid=20
+
+...
+
+$ cat stdout.474858.91
+SGE_TASK_ID = 91  tid=91
+SGE_TASK_ID = 91  tid=92
+SGE_TASK_ID = 91  tid=93
+SGE_TASK_ID = 91  tid=94
+SGE_TASK_ID = 91  tid=95
+SGE_TASK_ID = 91  tid=96
+SGE_TASK_ID = 91  tid=97
+SGE_TASK_ID = 91  tid=98
+SGE_TASK_ID = 91  tid=99
+SGE_TASK_ID = 91  tid=100
+</pre></div>
+</div>
+</section>
+</section>
 
         </article>
       </div>
@@ -216,21 +325,38 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Job array (or array jobs)</a><ul>
+<li><a class="reference internal" href="#example-1">Example 1</a></li>
+<li><a class="reference internal" href="#example-2">Example 2</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
   </div>
-</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/furo.js"></script>
-    <script src="_static/design-tabs.js"></script>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-<script src="_static/searchtools.js"></script>
-<script src="_static/language_data.js"></script>
-<script src="searchindex.js"></script></body>
+    </body>
 </html>

@@ -2,10 +2,10 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Using secure client (ssh)" href="appendix/ssh.html" /><link rel="prev" title="“hello world” job script" href="hello-world.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Using secure client (ssh)" href="appendix/ssh.html" /><link rel="prev" title="“hello world” job submission" href="hello-world.html" />
 
     
-        <title>Diving deeper into Hello world - Tutorial: Hoffman2 Cluster Job Scheduling</title>
+        <title>Shell behavior in job submission - Tutorial: Hoffman2 Cluster Job Scheduling</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -159,8 +159,8 @@
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hoffman2-components.html">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hello-world.html">“hello world” job script</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Diving deeper into Hello world</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-world.html">“hello world” job submission</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Shell behavior in job submission</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
@@ -185,20 +185,22 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="diving-deeper-into-hello-world">
-<h1>Diving deeper into Hello world<a class="headerlink" href="#diving-deeper-into-hello-world" title="Permalink to this headline">¶</a></h1>
+          <section id="shell-behavior-in-job-submission">
+<h1>Shell behavior in job submission<a class="headerlink" href="#shell-behavior-in-job-submission" title="Permalink to this headline">¶</a></h1>
 <p>This section is for the curious to see some of the technical details under the hood in job submission.</p>
+<section id="qsub-non-login-shell">
+<h2>qsub: non-login shell<a class="headerlink" href="#qsub-non-login-shell" title="Permalink to this headline">¶</a></h2>
 <p>The process tree on the compute node looks like the following at runtime:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sge   Apr24 681:23 /u/systems/UGE8.6.4/bin/lx-amd64/sge_execd
-sge   17:02   0:00  \_ sge_shepherd-3455530 -bg
-sch   17:02   0:00      \_ /bin/bash /work/UGE/8.6.4/n6377/job_scripts/3455530
-sch   17:02   0:00          \_ ...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  sge   /u/systems/UGE8.6.4/bin/lx-amd64/sge_execd
+  sge    \_ sge_shepherd-3455530 -bg
+<span class="hll">  sch        \_ /bin/bash /work/UGE/8.6.4/n6377/job_scripts/3455530
+</span>  sch            \_ ...
 </pre></div>
 </div>
 <p>The file <code class="docutils literal notranslate"><span class="pre">/work/UGE/8.6.4/n6377/job_scripts/3455530</span></code> is a copy of the job script that was submitted. From this process, we can see that the job script (bash) is run as a non-interactive shell that is not a login shell. This explains why some of the things you see in a login shell does not automatically occur in the job script. For example, running the following job script:</p>
@@ -220,13 +222,31 @@ module list
 </pre></div>
 </div>
 <p>and submit it as usual. At run time, we see now bash is running in the login shell mode with the <code class="docutils literal notranslate"><span class="pre">-l</span></code> option:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sge  Apr24 707:57 /u/systems/UGE8.6.4/bin/lx-amd64/sge_execd
-sge  17:20   0:00  \_ sge_shepherd-3455543 -bg
-sch  17:20   0:00      \_ /bin/bash -l /work/UGE/8.6.4/n6376/job_scripts/3455543
-sch  17:20   0:00          \_ ...
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  sge  /u/systems/UGE8.6.4/bin/lx-amd64/sge_execd
+  sge  \_ sge_shepherd-3455543 -bg
+<span class="hll">  sch      \_ /bin/bash -l /work/UGE/8.6.4/n6376/job_scripts/3455543
+</span>  sch          \_ ...
 </pre></div>
 </div>
 <p>and the module command can work automatically as expected without extra “manual” activation in the job script.</p>
+</section>
+<section id="qrsh-login-shell">
+<h2>qrsh: login shell<a class="headerlink" href="#qrsh-login-shell" title="Permalink to this headline">¶</a></h2>
+<p>In a qrsh session, e.g.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>qrsh -l h_data=2G,h_rt=2:00:00
+</pre></div>
+</div>
+<p>the process tree on the compute node looks like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  sge   /u/systems/UGE8.6.4/bin/lx-amd64/sge_execd
+  sge   \_ sge_shepherd-3481290 -bg
+  root      \_ sshd: sch [priv]
+  sch           \_ sshd: sch@pts/0
+<span class="hll">  sch               \_ -bash
+</span>  sch                  \_ ...
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-</span></code> associated with <code class="docutils literal notranslate"><span class="pre">bash</span></code> indicates that it is started as a login shell.</p>
+</section>
 </section>
 
         </article>
@@ -250,7 +270,7 @@ sch  17:20   0:00          \_ ...
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">“hello world” job script</div>
+                <div class="title">“hello world” job submission</div>
                 
               </div>
             </a>
@@ -262,8 +282,28 @@ sch  17:20   0:00          \_ ...
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Shell behavior in job submission</a><ul>
+<li><a class="reference internal" href="#qsub-non-login-shell">qsub: non-login shell</a></li>
+<li><a class="reference internal" href="#qrsh-login-shell">qrsh: login shell</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

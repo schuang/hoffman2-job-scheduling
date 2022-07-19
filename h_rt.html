@@ -2,9 +2,11 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="#" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
 
-    <title>Search - Tutorial: Hoffman2 Cluster Job Scheduling</title><link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    
+        <title>Time limit: h_rt - Tutorial: Hoffman2 Cluster Job Scheduling</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=fade93df149f7c5fedb3ff897f799dc7d283b420" />
@@ -148,7 +150,7 @@
   
   <span class="sidebar-brand-text">Tutorial: Hoffman2 Cluster Job Scheduling</span>
   
-</a><form class="sidebar-search-container" method="get" action="#" role="search">
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
@@ -189,17 +191,25 @@
           </label>
         </div>
         <article role="main">
-          
-<noscript>
-<div class="admonition error">
-  <p class="admonition-title">Error</p>
-  <p>
-    Please activate JavaScript to enable the search functionality.
-  </p>
+          <section id="time-limit-h-rt">
+<h1>Time limit: <code class="docutils literal notranslate"><span class="pre">h_rt</span></code><a class="headerlink" href="#time-limit-h-rt" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p>Format: <code class="docutils literal notranslate"><span class="pre">hh:mm:ss</span></code> (hour:minute:second), e.g. <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">h_rt=4:00:00</span></code></p></li>
+<li><p>It is not possible to alter the <code class="docutils literal notranslate"><span class="pre">h_rt</span></code> value for a <em>running</em> job.</p></li>
+<li><p>The job is terminated unconditionally once the time limit specified by <code class="docutils literal notranslate"><span class="pre">h_rt</span></code> is reached.</p></li>
+<li><p>One can  modify the <code class="docutils literal notranslate"><span class="pre">h_rt</span></code> value for a <em>pending</em> job, e.g. job ID 54321, to 8 hours:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>qalter -mods l_hard h_rt 8:00:00 54321
+</pre></div>
 </div>
-</noscript>
-
-<div id="search-results"></div>
+</li>
+<li><p>A regular job can run up to 24 hours (i.e. <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">h_rt=24:00:00</span></code>).</p></li>
+<li><p><em>If</em> your account has high-priority access, a job can run up to 14 days on the purchased nodes, e.g. <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">h_rt=336:00:00,highp</span></code>. (note: <code class="docutils literal notranslate"><span class="pre">-l</span> <span class="pre">highp</span></code>)</p>
+<blockquote>
+<div><p><strong>Note:</strong> Not everyone has high-priority access; check with your PI to see if your research group has purchased compute nodes.</p>
+</div></blockquote>
+</li>
+</ul>
+</section>
 
         </article>
       </div>
@@ -229,8 +239,5 @@
     <script src="_static/scripts/furo.js"></script>
     <script src="_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    
-<script src="_static/searchtools.js"></script>
-<script src="_static/language_data.js"></script>
-<script src="searchindex.js"></script></body>
+    </body>
 </html>

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     
-        <title>Example: running RStudio interactively with graphical interface - Tutorial: Hoffman2 Cluster Job Scheduling</title>
+        <title>&lt;no title&gt; - Tutorial: Hoffman2 Cluster Job Scheduling</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
@@ -159,8 +159,8 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">“hello world” job script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-advanced.html">Diving deeper into Hello world</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job submission</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world-advanced.html">Shell behavior in job submission</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
@@ -191,22 +191,7 @@
           </label>
         </div>
         <article role="main">
-          <section id="example-running-rstudio-interactively-with-graphical-interface">
-<h1>Example: running RStudio interactively with graphical interface<a class="headerlink" href="#example-running-rstudio-interactively-with-graphical-interface" title="Permalink to this headline">¶</a></h1>
-<p>In this case, RStudio runs on the compute node.
-The graphical interface goes through X11 forwarding from the compute node to display on your local computer.</p>
-<p>Make sure an X server is installed on your local computer (e.g., <a class="reference external" href="https://www.xquartz.org/">XQuartz</a> for MacOS, <a class="reference external" href="https://mobaxterm.mobatek.net/download.html">MobaXterm</a> for Windows).</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ ssh -X user_id@hoffman2.idre.ucla.edu   # from your local computer
-…
-$ qrsh -l h_rt=2:00:00,h_data=4g          # on login node
-$ module load Rstudio/1.4.1717            # on compute node
-$ rstudio
-</pre></div>
-</div>
-<p>If everything goes, you should see the RStudio graphical window on your local computer that looks like this:</p>
-<a class="reference internal image-reference" href="../_images/rstudio-qrsh.png"><img alt="rstudio in qrsh" src="../_images/rstudio-qrsh.png" style="width: 500px;"/></a>
-</section>
-
+          
         </article>
       </div>
       <footer>

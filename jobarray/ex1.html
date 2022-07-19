@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     
-        <title>Example 1 - Tutorial: Hoffman2 Cluster Job Scheduling</title>
+        <title>&lt;no title&gt; - Tutorial: Hoffman2 Cluster Job Scheduling</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=df49af52631e7917044a9c21a57f7b83170a6dd0" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.59c74d8c95b765a7fd995ac71d459ebe.min.css" />
@@ -159,8 +159,8 @@
   <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hoffman2-components.html">Hoffman2 Cluster Components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">“hello world” job script</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../hello-world-advanced.html">Diving deeper into Hello world</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world.html">"hello world" job submission</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-world-advanced.html">Shell behavior in job submission</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul>
@@ -191,32 +191,7 @@
           </label>
         </div>
         <article role="main">
-          <section id="example-1">
-<h1>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
-#$ -cwd
-#$ -t 1-10
-#$ -N test
-#$ -j y
-#$ -o stdout.$JOB_ID.$TASK_ID
-#$ -l h_rt=00:10:00,h_data=1g
-
-echo 'hello' $SGE_TASK_ID
-</pre></div>
-</div>
-<p>After the run, there will be 10 output files:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ls stdout*
-stdout.475262.1   stdout.475262.2  stdout.475262.4  stdout.475262.6  stdout.475262.8
-stdout.475262.10  stdout.475262.3  stdout.475262.5  stdout.475262.7  stdout.475262.9
-</pre></div>
-</div>
-<p>For example:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cat stdout.475262.1
-hello 1
-</pre></div>
-</div>
-</section>
-
+          
         </article>
       </div>
       <footer>
